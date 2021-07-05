@@ -22,7 +22,7 @@ public class User {
     private String lastName;
 
     @Column
-    private int age;
+    private Long age;
 
     public String getFirstName() {
         return firstName;
@@ -40,11 +40,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public int getAge() {
+    public Long getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Long age) {
         this.age = age;
     }
 
