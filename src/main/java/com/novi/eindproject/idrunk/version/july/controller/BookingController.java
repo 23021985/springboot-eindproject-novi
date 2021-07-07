@@ -20,15 +20,16 @@ public class BookingController {
         return ResponseEntity.ok(bookingService.getBookings());
     }
 
-    @PostMapping("")
-    public ResponseEntity<Object> addBooking(@RequestBody Booking booking){
-        bookingService.addBooking(booking);
-        return ResponseEntity.ok("Added");
-    }
     @GetMapping("/{id}")
     public ResponseEntity<Object> getBooking(@PathVariable("id") long id) throws RecordNotFoundException {
         Booking booking = bookingService.getBooking(id);
         return ResponseEntity.ok(booking);
+    }
+
+    @PostMapping("")
+    public ResponseEntity<Object> addBooking(@RequestBody Booking booking){
+        bookingService.addBooking(booking);
+        return ResponseEntity.ok("Added");
     }
 
     @PutMapping("/{id}")
