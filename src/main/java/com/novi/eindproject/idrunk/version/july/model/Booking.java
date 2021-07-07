@@ -1,6 +1,5 @@
 package com.novi.eindproject.idrunk.version.july.model;
 
-
 import javax.persistence.*;
 
 @Entity

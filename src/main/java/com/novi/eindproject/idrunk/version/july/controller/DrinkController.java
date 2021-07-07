@@ -21,13 +21,13 @@ public class DrinkController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Object> addPerson(@RequestBody Drink drink) {
+    public ResponseEntity<Object> addDrink(@RequestBody Drink drink) {
         drinkService.addDrink(drink);
         return ResponseEntity.ok("Added");
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getPerson(@PathVariable("id") long id) throws RecordNotFoundException {
+    public ResponseEntity<Object> getDrink(@PathVariable("id") long id) throws RecordNotFoundException {
         Drink drink = drinkService.getDrink(id);
         return ResponseEntity.ok(drink);
     }

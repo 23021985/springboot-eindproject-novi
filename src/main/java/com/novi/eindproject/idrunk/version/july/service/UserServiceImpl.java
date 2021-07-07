@@ -1,6 +1,5 @@
 package com.novi.eindproject.idrunk.version.july.service;
 
-
 import com.novi.eindproject.idrunk.version.july.exceptions.RecordNotFoundException;
 import com.novi.eindproject.idrunk.version.july.exceptions.UsernameNotFoundException;
 import com.novi.eindproject.idrunk.version.july.model.Authority;
@@ -8,8 +7,8 @@ import com.novi.eindproject.idrunk.version.july.model.User;
 import com.novi.eindproject.idrunk.version.july.repository.UserRepository;
 import com.novi.eindproject.idrunk.version.july.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 import java.util.Collection;
 import java.util.Optional;
@@ -20,6 +19,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 //    @Autowired
 //    private AuthorityRepository authorityRepository;
@@ -43,6 +45,7 @@ public class UserServiceImpl implements UserService {
     public String createUser(User user) {
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         user.setApikey(randomString);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User newUser = userRepository.save(user);
         return newUser.getUsername();
     }

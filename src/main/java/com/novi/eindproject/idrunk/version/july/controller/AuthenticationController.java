@@ -1,9 +1,5 @@
 package com.novi.eindproject.idrunk.version.july.controller;
 
-//import com.eindproject.idrunk.lastVersion.payload.AuthenticationRequest;
-//import com.eindproject.idrunk.lastVersion.payload.AuthenticationResponse;
-//import com.eindproject.idrunk.lastVersion.service.CustomUserDetailsService;
-//import com.eindproject.idrunk.lastVersion.utils.JwtUtil;
 import com.novi.eindproject.idrunk.version.july.payload.AuthenticationRequest;
 import com.novi.eindproject.idrunk.version.july.payload.AuthenticationResponse;
 import com.novi.eindproject.idrunk.version.july.service.CustomUserDetailsService;
@@ -16,11 +12,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-//import utils.JwtUtil;
 
 import java.security.Principal;
 
 @RestController
+@CrossOrigin
 public class AuthenticationController {
 
     @Autowired
