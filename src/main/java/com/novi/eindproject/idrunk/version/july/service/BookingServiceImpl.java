@@ -7,6 +7,7 @@ import com.novi.eindproject.idrunk.version.july.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -36,5 +37,30 @@ public class BookingServiceImpl implements BookingService{
     @Override
     public void updateBooking(long id, Booking booking) throws RecordNotFoundException {
 
+    }
+
+    @Override
+    public List<Booking> getBookingsBetweenDates(LocalDateTime start, LocalDateTime end) {
+        return null;
+    }
+
+    @Override
+    public List<Booking> getBookingsForTafel(Long boatId) {
+        return null;
+    }
+
+    @Override
+    public List<Booking> getBookingsForUser(Long userId) {
+        return null;
+    }
+
+    @Override
+    public Booking planBooking(Long tafelId, Long userId, LocalDateTime plannedStartTime, LocalDateTime plannedEndTime) {
+        return null;
+    }
+
+    @Override
+    public Booking completeBooking(Long bookingId, LocalDateTime actualStartTime, LocalDateTime actualEndTime) {
+        return null;
     }
 }

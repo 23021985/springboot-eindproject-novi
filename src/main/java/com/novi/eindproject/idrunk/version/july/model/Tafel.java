@@ -1,6 +1,10 @@
 package com.novi.eindproject.idrunk.version.july.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import java.awt.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -8,10 +12,13 @@ public class Tafel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
+
+    @OneToMany(mappedBy = "tafel")
+    List<Booking> bookings;
 
     @Column
-    private int tafelNr;
+    private Long tafelNr;
 
     @Column
     private String time;
@@ -28,12 +35,27 @@ public class Tafel {
     @Column
     private boolean isFree;
 
+    public Long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Long amount) {
+        this.amount = amount;
+    }
+
+    public boolean isHasArived() {
+        return hasArived;
+    }
+
+    @Column
+    private Long amount;
+
     @Column
     private String bookedBy;
 
     @Column boolean hasArived;
 
-    public Tafel(int id, int tafelNr, String time, String date, String bookingName, int maxGuest, boolean isFree, String bookedBy, boolean hasArived){
+    public Tafel(Long id, Long tafelNr, String time, String date, String bookingName, int maxGuest, boolean isFree, String bookedBy, boolean hasArived, Long amount){
         this.id = id;
         this.tafelNr = tafelNr;
         this.time = time;
@@ -43,6 +65,7 @@ public class Tafel {
         this.isFree = isFree;
         this.bookedBy = bookedBy;
         this.hasArived = hasArived;
+        this.amount = amount;
     }
 
     public Tafel() {
@@ -57,11 +80,11 @@ public class Tafel {
         this.bookingName = bookingName;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -75,16 +98,16 @@ public class Tafel {
 
 
 
-    public int getTafelNr() {
+    public Long getTafelNr() {
         return tafelNr;
     }
 
-    public void setTafelNr(int tafelNr) {
+    public void setTafelNr(Long tafelNr) {
         this.tafelNr = tafelNr;
     }
 
 
-    public Tafel(int tafelNr) {
+    public Tafel(Long tafelNr) {
         this.tafelNr = tafelNr;
     }
 

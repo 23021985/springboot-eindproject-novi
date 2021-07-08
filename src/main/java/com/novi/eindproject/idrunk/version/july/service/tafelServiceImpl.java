@@ -12,37 +12,46 @@ import java.util.List;
 
 @Service
 class TafelServiceImpl implements TafelService {
+    private TafelRepository repository;
 
     @Autowired
-    TafelRepository tafelRepository;
+    public TafelServiceImpl(TafelRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public List<Tafel> getTafel() {
-       return tafelRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
-    public Tafel getTafel(long id) throws RecordNotFoundException {
-       return tafelRepository.getById(id);
+    public List<Tafel> findTafelsByTafelNr(String query) {
+        return null;
     }
 
     @Override
-    public Tafel addTafel(Tafel tafel) {
-        return tafelRepository.save(tafel);
-    }
-
-    @Override
-    public void removeTafel(long id) throws RecordNotFoundException {
-    return ;
-    }
-
-    @Override
-    public void updateTafel(long id, Tafel tafel) throws RecordNotFoundException {
-
+    public List<Tafel> findTafelsByType(String type) {
+        return null;
     }
 
 //    @Override
-//    public String createTafel(Tafel tafel) {
-//        return null;
+//
+//    public List<Tafel> findTafelsByTafelNr(String query) {
+//        return repository.findByNameContainingIgnoreCase(query);
 //    }
+//
+//    @Override
+//    public List<Tafel> findTafelsByType(String type) {
+//        return repository.findByType(type);
+//    }
+
+    @Override
+    public Tafel saveTafel(Tafel tafel) {
+        return repository.save(tafel);
+    }
+
+    @Override
+    public void deleteTafel(Long id) {
+        repository.deleteById(id);
+    }
 }

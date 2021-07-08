@@ -7,13 +7,19 @@ import com.novi.eindproject.idrunk.version.july.model.Tafel;
 import java.util.List;
 
 public interface TafelService {
+
     List<Tafel> getTafel();
-    Tafel getTafel(long id) throws RecordNotFoundException;
-    Tafel addTafel(Tafel tafel);
-    void removeTafel(long id) throws RecordNotFoundException;
-    void updateTafel(long id, Tafel tafel) throws RecordNotFoundException;
-//    String createTafel(Tafel tafel);
+
+    List<Tafel> findTafelsByTafelNr(String query);
+//
+    List<Tafel> findTafelsByType(String type);
+//
+    Tafel saveTafel(Tafel tafel);
+//
+    void deleteTafel(Long id);
+
 }
+
 
 
 
