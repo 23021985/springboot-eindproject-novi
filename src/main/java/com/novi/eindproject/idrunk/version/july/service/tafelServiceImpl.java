@@ -1,14 +1,12 @@
 package com.novi.eindproject.idrunk.version.july.service;
 
-import com.novi.eindproject.idrunk.version.july.exceptions.RecordNotFoundException;
-import com.novi.eindproject.idrunk.version.july.model.Booking;
 import com.novi.eindproject.idrunk.version.july.model.Tafel;
-import com.novi.eindproject.idrunk.version.july.repository.BookingRepository;
 import com.novi.eindproject.idrunk.version.july.repository.TafelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 class TafelServiceImpl implements TafelService {
@@ -25,14 +23,14 @@ class TafelServiceImpl implements TafelService {
     }
 
     @Override
-    public List<Tafel> findTafelsByTafelNr(String query) {
-        return repository.findByNameContainingIgnoreCase(query);
+    public List<Tafel> findTafelsByTafelNr(Long id) {
+        return repository.findAll();
     }
 
     @Override
-    public List<Tafel> findTafelsByType(String type) {
-        return repository.findByType(type);
-    }
+    public List<Tafel> findTafelsById(Long id) {
+        return repository.findAll();    }
+
 
     @Override
     public Tafel saveTafel(Tafel tafel) {
@@ -54,8 +52,8 @@ class TafelServiceImpl implements TafelService {
 //
 //    }
 //
-//    @Override
-//    public void addTafel(Tafel tafel) {
+    @Override
+    public void addTafel(Tafel tafel) {
 
-//    }
+    }
 }

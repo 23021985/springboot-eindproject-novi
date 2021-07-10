@@ -60,7 +60,7 @@ import java.util.List;
         var optionalUser = UserRepository.findByUsername(username);
         var optionalTafel = tafelRepository.findById(tafelId);
 
-        // If either the customer or boat does not exist, we throw an exception
+        // If either the user or tafel does not exist, we throw an exception
         if (optionalUser.isEmpty() || optionalTafel.isEmpty()) {
             throw new NotFoundException();
         }
@@ -69,7 +69,7 @@ import java.util.List;
         var tafel = optionalTafel.get();
 
         // Checks whether there is an overlap in the schedule, if there is an overlap it throws an exception
-//        validateBookingSlotIsFree(plannedStartTime, plannedEndTime, tafel);
+        validateBookingSlotIsFree(plannedStartTime, plannedEndTime, tafel);
 
         // The booking details are valid, we create it and store it in the database
         var booking = new Booking();

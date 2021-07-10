@@ -1,7 +1,5 @@
 package com.novi.eindproject.idrunk.version.july.service;
 
-import com.novi.eindproject.idrunk.version.july.exceptions.RecordNotFoundException;
-import com.novi.eindproject.idrunk.version.july.model.Drink;
 import com.novi.eindproject.idrunk.version.july.model.Tafel;
 
 import java.util.List;
@@ -10,9 +8,9 @@ public interface TafelService {
 
     List<Tafel> getTafel();
 
-    List<Tafel> findTafelsByTafelNr(String query);
+    List<Tafel> findTafelsByTafelNr(Long id);
 //
-    List<Tafel> findTafelsByType(String type);
+    List <Tafel>findTafelsById(Long id);
 //
     Tafel saveTafel(Tafel tafel);
 //
@@ -22,7 +20,7 @@ public interface TafelService {
 //
 //    void updateTafel(long id, Tafel newTafel);
 //
-//    void addTafel(Tafel tafel);
+    void addTafel(Tafel tafel);
 }
 
 

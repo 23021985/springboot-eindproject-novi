@@ -27,19 +27,20 @@ public class TafelController {
     }
 
     @GetMapping
-    public List<TafelDto> getTafels(@RequestParam(value = "query", required = false, defaultValue = "") String query,
-                                  @RequestParam(value = "type", required = false) String type) {
+    public List<TafelDto> getTafels(@RequestParam(value = "type", required = false) Long id) {
         var dtos = new ArrayList<TafelDto>();
 
-        List<Tafel> tafels;
-        if (type == null) {
-            tafels = tafelService.findTafelsByTafelNr(query);
-        } else {
-            tafels = tafelService.findTafelsByType(type);
-        }
-
-        for (Tafel tafel : tafels) {
-            dtos.add(TafelDto.fromTafel(tafel));
+        List <Tafel> tafels;
+        if (id == null) {
+//
+            tafels = tafelService.findTafelsById(id);
+            for (Tafel tafel : tafels) {
+                dtos.add(TafelDto.fromTafel(tafel));
+            }
+//        } else {
+//            for (Tafel tafel : tafels) {
+//                dtos.add(TafelDto.fromTafel(tafel));
+//            }
         }
 
         return dtos;
@@ -77,28 +78,10 @@ public class TafelController {
 //    }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Object> getTafel(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> getTafel(@PathVariable("id")Long id) {
         Tafel tafel = (Tafel) tafelService.getTafel();
         return ResponseEntity.ok(tafel);
     }
 
-//
-//    @PostMapping(value = "")
-//    public ResponseEntity<Object> addTafel(@RequestBody Tafel tafel) {
-//       tafelService.addTafel(tafel);
-//        return ResponseEntity.ok("Added");
-//    }
-//
-//    @PutMapping(value = "/{id}")
-//    public ResponseEntity<Object> updateTafel(@PathVariable("id") long id, @RequestBody Tafel newTafel) {
-//        tafelService.updateTafel(id, newTafel);
-//        return ResponseEntity.noContent().build();
-//    }
-//
-//    @DeleteMapping(value = "/id")
-//    public ResponseEntity<Object> deleteTafel(@PathVariable("id") long id) throws RecordNotFoundException {
-//        tafelService.removeTafel(id);
-//        return ResponseEntity.noContent().build();
-//    }
 
 }
