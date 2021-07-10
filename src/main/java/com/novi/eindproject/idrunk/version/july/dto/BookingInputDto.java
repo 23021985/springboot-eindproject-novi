@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public class BookingInputDto {
 
     public Long tafelId;
-    public Long customerId;
+    public String username;
 
     public LocalDateTime startTime;
     public LocalDateTime endTime;

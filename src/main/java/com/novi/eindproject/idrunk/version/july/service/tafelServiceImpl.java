@@ -26,24 +26,13 @@ class TafelServiceImpl implements TafelService {
 
     @Override
     public List<Tafel> findTafelsByTafelNr(String query) {
-        return null;
+        return repository.findByNameContainingIgnoreCase(query);
     }
 
     @Override
     public List<Tafel> findTafelsByType(String type) {
-        return null;
+        return repository.findByType(type);
     }
-
-//    @Override
-//
-//    public List<Tafel> findTafelsByTafelNr(String query) {
-//        return repository.findByNameContainingIgnoreCase(query);
-//    }
-//
-//    @Override
-//    public List<Tafel> findTafelsByType(String type) {
-//        return repository.findByType(type);
-//    }
 
     @Override
     public Tafel saveTafel(Tafel tafel) {
@@ -54,4 +43,19 @@ class TafelServiceImpl implements TafelService {
     public void deleteTafel(Long id) {
         repository.deleteById(id);
     }
+
+//    @Override
+//    public void removeTafel(long id) {
+//
+//    }
+//
+//    @Override
+//    public void updateTafel(long id, Tafel newTafel) {
+//
+//    }
+//
+//    @Override
+//    public void addTafel(Tafel tafel) {
+
+//    }
 }

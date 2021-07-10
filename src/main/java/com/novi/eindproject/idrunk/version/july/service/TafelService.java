@@ -17,7 +17,12 @@ public interface TafelService {
     Tafel saveTafel(Tafel tafel);
 //
     void deleteTafel(Long id);
-
+//
+//    void removeTafel(long id);
+//
+//    void updateTafel(long id, Tafel newTafel);
+//
+//    void addTafel(Tafel tafel);
 }
 
 

@@ -26,24 +26,24 @@ public class TafelController {
         this.tafelService = tafelService;
     }
 
-//    @GetMapping
-//    public List<TafelDto> getTafels(@RequestParam(value = "query", required = false, defaultValue = "") String query,
-//                                  @RequestParam(value = "type", required = false) String type) {
-//        var dtos = new ArrayList<TafelDto>();
+    @GetMapping
+    public List<TafelDto> getTafels(@RequestParam(value = "query", required = false, defaultValue = "") String query,
+                                  @RequestParam(value = "type", required = false) String type) {
+        var dtos = new ArrayList<TafelDto>();
 
-//        List<Tafel> tafel;
-//        if (type == null) {
-//            tafel = tafelService.findTafelsByTafelNr(query);
-//        } else {
-//            tafel = tafelService.findTafelsByType(type);
-//        }
-//
-//        for (Tafel tafel : tafels) {
-//            dtos.add(TafelDto.fromTafel(tafel));
-//        }
-//
-//        return dtos;
-//    }
+        List<Tafel> tafels;
+        if (type == null) {
+            tafels = tafelService.findTafelsByTafelNr(query);
+        } else {
+            tafels = tafelService.findTafelsByType(type);
+        }
+
+        for (Tafel tafel : tafels) {
+            dtos.add(TafelDto.fromTafel(tafel));
+        }
+
+        return dtos;
+    }
 
     @PostMapping
     public TafelDto saveTafel(@RequestBody TafelInputDto dto) {
@@ -55,12 +55,6 @@ public class TafelController {
     public void deleteTafel(@PathVariable("id") Long id) {
         tafelService.deleteTafel(id);
     }
-
-
-
-
-
-
 
 //    @Autowired
 //    FetchDataService fetchDataService;
@@ -76,18 +70,18 @@ public class TafelController {
 //    public TafelController(TafelService tafelService) {
 //        this.tafelService = tafelService;
 //    }
-//
-    @GetMapping()
-    public ResponseEntity<Object> getTafel(){
-        return ResponseEntity.ok().body(tafelService.getTafel());
-    }
+
+//    @GetMapping()
+//    public ResponseEntity<Object> getTafel(){
+//        return ResponseEntity.ok().body(tafelService.getTafel());
+//    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> getTafel(@PathVariable("id") Long id) {
         Tafel tafel = (Tafel) tafelService.getTafel();
         return ResponseEntity.ok(tafel);
     }
-}
+
 //
 //    @PostMapping(value = "")
 //    public ResponseEntity<Object> addTafel(@RequestBody Tafel tafel) {
@@ -106,5 +100,5 @@ public class TafelController {
 //        tafelService.removeTafel(id);
 //        return ResponseEntity.noContent().build();
 //    }
-//
-//}
+
+}

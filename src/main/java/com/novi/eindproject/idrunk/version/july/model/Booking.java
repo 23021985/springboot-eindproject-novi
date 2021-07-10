@@ -7,109 +7,104 @@ import java.time.LocalDateTime;
 @Table
 public class Booking {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        Long id;
 
-    @ManyToOne
-    Tafel tafel;
+        @ManyToOne
+        Tafel tafel;
 
-    @ManyToOne
-    User user;
+        @ManyToOne
+        User user;
 
-    LocalDateTime plannedStartTime;
+        @ManyToOne
+        Drink drink;
 
-    LocalDateTime plannedEndTime;
+        LocalDateTime plannedStartTime;
 
-    LocalDateTime actualStartTime;
+        LocalDateTime plannedEndTime;
 
-    LocalDateTime actualEndTime;
+        private BookingStatus status;
 
+        LocalDateTime actualStartTime;
 
-    @Column
-    private String bookingName;
+        LocalDateTime actualEndTime;
 
-    @Column
-    private String bookingDate;
+//        Double charge;
+//
+//        BookingStatus status;
+//
+//        @Column
+//        private String plannedStartTime;
 
-    @Column
-    private String timeOfBooking;
+        // Getters
+        public Long getId() {
+            return id;
+        }
 
-    public long getId() {
-        return id;
-    }
+        public Tafel getTafel() {
+            return tafel;
+        }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+        public User getUser() {
+            return user;
+        }
 
-    public String getBookingName() {
-        return bookingName;
-    }
+        public LocalDateTime getPlannedStartTime() {
+            return plannedStartTime;
+        }
 
-    public void setBookingName(String bookingName) {
-        this.bookingName = bookingName;
-    }
+        public LocalDateTime getPlannedEndTime() {
+            return plannedEndTime;
+        }
 
-    public String getBookingDate() {
-        return bookingDate;
-    }
+        public LocalDateTime getActualStartTime() {
+            return actualStartTime;
+        }
 
-    public void setBookingDate(String bookingDate) {
-        this.bookingDate = bookingDate;
-    }
+        public LocalDateTime getActualEndTime() {
+            return actualEndTime;
+        }
 
-    public String getTimeOfBooking() {
-        return timeOfBooking;
-    }
+        public BookingStatus getStatus() {
+            return status;
+        }
 
-    public void setTimeOfBooking(String timeOfBooking) {
-        this.timeOfBooking = timeOfBooking;
-    }
+//        public Double getCharge() {
+//            return charge;
+//        }
 
-    public boolean isHasArrived() {
-        return hasArrived;
-    }
+        // Setters
+        public void setId(Long id) {
+            this.id = id;
+        }
 
-    public void setHasArrived(boolean hasArrived) {
-        this.hasArrived = hasArrived;
-    }
+        public void setTafel(Tafel tafel) {
+            this.tafel = tafel;
+        }
 
-    @Column
-    private boolean hasArrived;
+        public void setUser(User user) {
+            this.user = user;
+        }
 
-    public Booking(long id, String bookingName, String bookingDate, String timeOfBooking, boolean hasArrived) {
-        this.id = id;
-        this.bookingName = bookingName;
-        this.bookingDate = bookingDate;
-        this.timeOfBooking = timeOfBooking;
-        this.hasArrived = hasArrived;
-    }
+        public void setPlannedStartTime(LocalDateTime plannedStartTime) {
+            this.plannedStartTime = plannedStartTime;
+        }
 
-    public Booking() {
+        public void setPlannedEndTime(LocalDateTime plannedEndTime) {
+            this.plannedEndTime = plannedEndTime;
+        }
 
-    }
+        public void setActualStartTime(LocalDateTime actualStartTime) {
+            this.actualStartTime = actualStartTime;
+        }
 
+        public void setActualEndTime(LocalDateTime actualEndTime) {
+            this.actualEndTime = actualEndTime;
+        }
 
-    public void setPlannedStartTime(LocalDateTime startTime) {
-    }
+        public void setStatus(BookingStatus status) {
+            this.status = status;
+        }
 
-    public void setPlannedEndTime(LocalDateTime endTime) {
-    }
-
-    public LocalDateTime getPlannedStartTime() {
-        return null;
-    }
-
-    public LocalDateTime getPlannedEndTime() {
-        return null;
-    }
-
-    public Tafel getTafel() {
-        return null;
-    }
-
-    public User getUser() {
-        return null;
-    }
 }

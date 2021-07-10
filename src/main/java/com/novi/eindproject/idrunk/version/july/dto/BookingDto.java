@@ -3,6 +3,7 @@ package com.novi.eindproject.idrunk.version.july.dto;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.novi.eindproject.idrunk.version.july.model.Booking;
+import com.novi.eindproject.idrunk.version.july.model.BookingStatus;
 
 import java.time.LocalDateTime;
 
@@ -31,7 +32,5 @@ public class BookingDto {
         dto.startTime = booking.getPlannedStartTime();
         dto.endTime = booking.getPlannedEndTime();
         return dto;
-
     }
-
 }

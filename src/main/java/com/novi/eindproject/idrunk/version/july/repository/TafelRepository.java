@@ -9,8 +9,8 @@ import java.util.List;
 public interface TafelRepository extends JpaRepository <Tafel, Long>{
 
     Tafel getById(long id);
-//
-//    List<Tafel> findByNameContainingIgnoreCase(String query);
-//
-//    List<Tafel> findByType(String type);
+
+    List<Tafel> findByNameContainingIgnoreCase(String query);
+
+    List<Tafel> findByType(String type);
 }

@@ -8,18 +8,19 @@ import java.util.List;
 
 public interface BookingService {
 
-    List<Booking>getBookings();
-    Booking getBooking(long id) throws RecordNotFoundException;
-    Booking addBooking(Booking booking);
-    void removeBooking(long id) throws RecordNotFoundException;
-    void updateBooking(long id, Booking booking) throws RecordNotFoundException;
+//    List<Booking>getBookings();
+//    Booking getBooking(long id) throws RecordNotFoundException;
+//    Booking addBooking(Booking booking);
+//    void removeBooking(long id) throws RecordNotFoundException;
+//    void updateBooking(long id, Booking booking) throws RecordNotFoundException;
+
     List<Booking> getBookingsBetweenDates(LocalDateTime start, LocalDateTime end);
 
-    List<Booking> getBookingsForTafel(Long boatId);
+    List<Booking> getBookingsForTafel(Long tafelId);
 
-    List<Booking> getBookingsForUser(Long userId);
+    List<Booking> getBookingsForUser(String username);
 
-    Booking planBooking(Long tafelId, Long userId, LocalDateTime plannedStartTime, LocalDateTime plannedEndTime);
+    Booking planBooking(Long tafelId, String username, LocalDateTime plannedStartTime, LocalDateTime plannedEndTime);
 
     Booking completeBooking(Long bookingId, LocalDateTime actualStartTime, LocalDateTime actualEndTime);
 
