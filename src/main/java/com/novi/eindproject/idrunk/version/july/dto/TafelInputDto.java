@@ -9,7 +9,7 @@ public class TafelInputDto {
     public Long id;
 
     public Tafel toTafel() {
-        var tafel = new Tafel();
+        var tafel = new Tafel(tafelNr, maxGuest);
         tafel.setTafelNr(tafelNr);
         tafel.setMaxGuest(maxGuest);
 

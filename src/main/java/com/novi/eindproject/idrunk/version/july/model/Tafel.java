@@ -1,109 +1,35 @@
 package com.novi.eindproject.idrunk.version.july.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
-import java.awt.*;
 import java.util.List;
 
+
 @Entity
-@Table
 public class Tafel {
+
+
+    @Column
+    private Long tafelNr;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "tafel")
-    List<Booking> bookings;
-
-    @Column
-    private Long tafelNr;
-
-//    @Column
-//    private String time;
-//
-//    @Column
-//    private String date;
-//
-//    @Column
-//    private String bookingName;
-
     @Column
     private int maxGuest;
 
-//    @Column
-//    private boolean isFree;
-//
-//    public Long getAmount() {
-//        return amount;
-//    }
-//
-//    public void setAmount(Long amount) {
-//        this.amount = amount;
-//    }
-//
-//    public boolean isHasArived() {
-//        return hasArived;
-//    }
-//
-//    @Column
-//    private Long amount;
-//
-//    @Column
-//    private String bookedBy;
-//
-//    @Column boolean hasArived;
+    @OneToMany(mappedBy = "tafel")
+    List<Booking> bookings;
 
-    public Tafel(Long id, Long tafelNr, int maxGuest){
-        this.id = id;
+
+    public Tafel(Long tafelNr, int maxGuest) {
         this.tafelNr = tafelNr;
-//        this.time = time;
-//        this.date = date;
-//        this.bookingName = bookingName;
         this.maxGuest = maxGuest;
-//        this.isFree = isFree;
-//        this.bookedBy = bookedBy;
-//        this.hasArived = hasArived;
-//        this.amount = amount;
     }
 
     public Tafel() {
 
     }
-
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
-    }
-//    public String getBookingName() {
-//        return bookingName;
-//    }
-//
-//    public void setBookingName(String bookingName) {
-//        this.bookingName = bookingName;
-//    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-//    public String getDate() {
-//        return date;
-//    }
-//
-//    public void setDate(String date) {
-//        this.date = date;
-//    }
-
-
 
     public Long getTafelNr() {
         return tafelNr;
@@ -113,34 +39,9 @@ public class Tafel {
         this.tafelNr = tafelNr;
     }
 
-
-    public Tafel(Long tafelNr) {
-        this.tafelNr = tafelNr;
+    public long getId() {
+        return id;
     }
-//
-//    public String getTime() {
-//        return time;
-//    }
-//
-//    public void setTime(String time) {
-//        this.time = time;
-//    }
-//
-//    public boolean isFree() {
-//        return isFree;
-//    }
-//
-//    public void setFree(boolean free) {
-//        isFree = free;
-//    }
-//
-//    public String getBookedBy() {
-//        return bookedBy;
-//    }
-//
-//    public void setBookedBy(String bookedBy) {
-//        this.bookedBy = bookedBy;
-//    }
 
     public int getMaxGuest() {
         return maxGuest;
@@ -150,13 +51,16 @@ public class Tafel {
         this.maxGuest = maxGuest;
     }
 
-//    public boolean hasArived() {
-//        return hasArived;
-//    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-//
-//    public void setHasArived(boolean hasArived) {
-//        this.hasArived = hasArived;
-//    }
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
 
 }

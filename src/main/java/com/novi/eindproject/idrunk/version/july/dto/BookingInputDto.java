@@ -5,17 +5,18 @@ import com.novi.eindproject.idrunk.version.july.model.Booking;
 import java.time.LocalDateTime;
 
 public class BookingInputDto {
-
     public Long tafelId;
-    public String username;
 
-    public LocalDateTime startTime;
-    public LocalDateTime endTime;
+    public String startTime;
+
+    public LocalDateTime date;
+
+    public String username;
 
     public Booking toBooking() {
         var booking = new Booking();
-        booking.setPlannedStartTime(startTime);
-        booking.setPlannedEndTime(endTime);
+        booking.setStartTime(startTime);
+        booking.setDate(date);
         return booking;
     }
 }

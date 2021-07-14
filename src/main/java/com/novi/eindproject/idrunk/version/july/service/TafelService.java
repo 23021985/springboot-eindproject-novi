@@ -7,23 +7,15 @@ import java.util.List;
 public interface TafelService {
 
     List<Tafel> getTafel();
+    Tafel getTafels(long id);
+    Tafel addTafel(Tafel tafel);
+    void removeTafel(long id);
+    void updateTafel(long id, Tafel tafel);
 
-    List<Tafel> findTafelsByTafelNr(Long id);
-//
-    List <Tafel>findTafelsById(Long id);
-//
-    Tafel saveTafel(Tafel tafel);
-//
-    void deleteTafel(Long id);
-//
-//    void removeTafel(long id);
-//
-//    void updateTafel(long id, Tafel newTafel);
-//
-    void addTafel(Tafel tafel);
+
+
+
 }
-
-
 
 
 

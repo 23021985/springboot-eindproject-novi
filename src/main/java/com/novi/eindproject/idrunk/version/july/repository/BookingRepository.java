@@ -9,13 +9,30 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BookingRepository extends JpaRepository<Booking, Long> {
-    List<Booking> findByPlannedStartTimeBetween(LocalDateTime start, LocalDateTime end);
+    Booking getById(Long id);
 
-    List<Booking> findByUser(User user);
+    List<Booking> findBookingByDate(LocalDateTime date);
+
+    List<Booking> findBookingByUser(String username);
 
     List<Booking> findByTafel(Tafel tafel);
 
-    List<Booking> findByPlannedStartTimeBetweenAndTafel(LocalDateTime start, LocalDateTime end, Tafel tafel);
-
-    List<Booking> findByPlannedEndTimeBetweenAndTafel(LocalDateTime start, LocalDateTime end, Tafel tafel);
+    List<Booking> findByUser(User user);
 }
+
+
+
+
+//public interface BookingRepository extends JpaRepository<Booking, Long> {
+//    List<Booking> findByPlannedStartTimeBetween(LocalDateTime start, LocalDateTime end);
+//
+//    List<Booking> findByUser(User user);
+//
+//    List<Booking> findByTafel(Tafel tafel);
+//
+//    List<Booking> findByPlannedStartTimeBetweenAndTafel(LocalDateTime start, LocalDateTime end, Tafel tafel);
+//
+//    List<Booking> findByPlannedEndTimeBetweenAndTafel(LocalDateTime start, LocalDateTime end, Tafel tafel);
+//
+//    List<Booking> findBookingByUsername(String username);
+//}

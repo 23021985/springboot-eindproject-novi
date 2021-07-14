@@ -9,6 +9,7 @@ import com.novi.eindproject.idrunk.version.july.model.User;
 import com.novi.eindproject.idrunk.version.july.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +17,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@CrossOrigin
 @RestController
-@RequestMapping(value="/booking")
+@RequestMapping("/bookings")
 public class BookingController {
-    private BookingService bookingService;
+    private final BookingService bookingService;
 
     @Autowired
     public BookingController(BookingService bookingService) {
@@ -27,21 +30,17 @@ public class BookingController {
     }
 
     @GetMapping
-    public List<BookingDto> getBookings(@RequestParam(value = "tafelId", required = false) Long tafelId,
-                                        @RequestParam(value = "username", required = false) String username,
-                                        @RequestParam(value = "start", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
-                                        @RequestParam(value = "end", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
+    public List<BookingDto> getBookings(@RequestParam(value = "username", required = false) String username,
+                                        @RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
+
         var dtos = new ArrayList<BookingDto>();
 
         List<Booking> bookings;
-        if (username != null && username == null && start == null && end == null) {
-            bookings = bookingService.getBookingsForTafel(tafelId);
+        if (username != null && date == null) {
+            bookings = bookingService.getBookingsByUsername(username);
 
-        } else if (username != null && tafelId == null && start == null && end == null) {
-            bookings = bookingService.getBookingsForUser(username);
-
-        } else if (start != null && end != null && username == null && tafelId == null) {
-            bookings = bookingService.getBookingsBetweenDates(start, end);
+        } else if (date != null && username == null) {
+            bookings = bookingService.getBookingsOnDate(date);
 
         } else {
             throw new BadRequestException();
@@ -56,8 +55,7 @@ public class BookingController {
 
     @PostMapping
     public BookingDto saveBooking(@RequestBody BookingInputDto dto) {
-        var booking = bookingService.planBooking(dto.tafelId, dto.username, dto.startTime, dto.endTime);
+        var booking = bookingService.saveBooking(dto.toBooking(), dto.tafelId, dto.username);
         return BookingDto.fromBooking(booking);
-
     }
 }
