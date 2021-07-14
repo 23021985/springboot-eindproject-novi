@@ -12,7 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("api/files")
+@RequestMapping("/files")
 @CrossOrigin
 public class FileController {
 

@@ -1,7 +1,11 @@
 package com.novi.eindproject.idrunk.version.july;
 
+import com.novi.eindproject.idrunk.version.july.invoices.InvoiceGenerator;
+import com.novi.eindproject.idrunk.version.july.invoices.OrderLine;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.List;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -17,5 +21,18 @@ public class DemoApplication {
             SpringApplication.run(DemoFileUpload.class, args);
         }
 
+    }
+    public static class invoiceGenerator {
+
+        public static void main(String[] args) {
+            InvoiceGenerator generator = new InvoiceGenerator();
+
+            var orderLines = List.of(new OrderLine(5, 2.99, "Product 1"), new OrderLine(2, 2.00, "Product 2"),
+                    new OrderLine(1, 6.99, "Product 3"), new OrderLine(3, 12.00, "Product 4"));
+
+            var invoice = generator.generateInvoice(orderLines);
+
+            System.out.println(invoice);
+        }
     }
 }
