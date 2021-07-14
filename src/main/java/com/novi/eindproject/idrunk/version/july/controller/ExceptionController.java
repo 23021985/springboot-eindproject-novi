@@ -1,6 +1,7 @@
 package com.novi.eindproject.idrunk.version.july.controller;
 
 import com.novi.eindproject.idrunk.version.july.exceptions.BadRequestException;
+import com.novi.eindproject.idrunk.version.july.exceptions.FileStorageException;
 import com.novi.eindproject.idrunk.version.july.exceptions.RecordNotFoundException;
 import com.novi.eindproject.idrunk.version.july.exceptions.UsernameNotFoundException;
 import javassist.NotFoundException;
@@ -33,5 +34,8 @@ public class ExceptionController {
         return ResponseEntity.notFound().build();
     }
 
-
+    @ExceptionHandler(value = FileStorageException.class)
+    public ResponseEntity<Object> exception(FileStorageException exception) {
+        return ResponseEntity.badRequest().build();
+    }
 }
