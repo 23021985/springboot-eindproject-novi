@@ -10,4 +10,12 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
+    @SpringBootApplication
+    public static class DemoFileUpload {
+
+        public void main(String[] args) {
+            SpringApplication.run(DemoFileUpload.class, args);
+        }
+
+    }
 }
