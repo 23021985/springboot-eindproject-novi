@@ -2,6 +2,7 @@ package com.novi.eindproject.idrunk.version.july.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -11,6 +12,9 @@ public class User {
     @Id
     @Column(nullable = false, unique = true)
     private String username;
+
+    @OneToMany(mappedBy = "user")
+    List<Booking> bookings;
 
     @Column(nullable = false, length = 255)
     private String password;
@@ -94,4 +98,6 @@ public class User {
         this.authorities.remove(authority);
     }
 
+    public void setMail(String mail) {
+    }
 }

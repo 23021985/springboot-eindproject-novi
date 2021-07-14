@@ -1,6 +1,5 @@
 package com.novi.eindproject.idrunk.version.july.controller;
 
-
 import com.novi.eindproject.idrunk.version.july.exceptions.BadRequestException;
 import com.novi.eindproject.idrunk.version.july.model.User;
 import com.novi.eindproject.idrunk.version.july.service.UserService;
@@ -12,13 +11,16 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.Map;
 
-@RestController
-@CrossOrigin
-@RequestMapping(value = "/users")
-public class UserController {
+    @RestController
+    @CrossOrigin
+    @RequestMapping(value = "/users")
+    public class UserController {
+        private final UserService userService;
 
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping(value = "")
     public ResponseEntity<Object> getUsers() {

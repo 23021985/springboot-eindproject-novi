@@ -1,54 +1,52 @@
 package com.novi.eindproject.idrunk.version.july.controller;
-import com.novi.eindproject.idrunk.version.july.exceptions.RecordNotFoundException;
+import com.novi.eindproject.idrunk.version.july.dto.TafelDto;
+import com.novi.eindproject.idrunk.version.july.dto.TafelInputDto;
 import com.novi.eindproject.idrunk.version.july.model.Tafel;
 import com.novi.eindproject.idrunk.version.july.service.TafelService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
-
-
+@CrossOrigin
 @RestController
 @RequestMapping("/tafels")
 public class TafelController {
 
-    @Autowired
     private final TafelService tafelService;
 
     public TafelController(TafelService tafelService) {
         this.tafelService = tafelService;
     }
 
-    @GetMapping()
-    public ResponseEntity<Object> getTafel(){
-        return ResponseEntity.ok().body(tafelService.getTafel());
+
+    @GetMapping("")
+    public ResponseEntity<Object> getTafel() {return ResponseEntity.ok(tafelService.getTafel());}
+
+//    @PostMapping("")
+//    public ResponseEntity<Object> addBike(@RequestBody Bike bike) {
+//        bikeService.addBike(bike);
+//        return ResponseEntity.ok("added");
+//    }
+
+    @PostMapping
+    public TafelDto saveTafel(@RequestBody TafelInputDto dto) {
+        var tafel = tafelService.addTafel(dto.toTafel());
+        return TafelDto.fromTafel(tafel);
     }
 
-    @GetMapping(value = "/id")
-    public ResponseEntity<Object> getTafel(@PathVariable("id") long id) {
-        Tafel tafel = tafelService.getTafel(id);
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getTafels(@PathVariable("id") long id) {
+        Tafel tafel = (Tafel) tafelService.getTafels(id);
         return ResponseEntity.ok(tafel);
     }
 
-    @PostMapping(value = "")
-    public ResponseEntity<Object> addTafel(@RequestBody Tafel tafel) {
-       tafelService.addTafel(tafel);
-        return ResponseEntity.ok("Added");
-    }
-
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Object> updateTable(@PathVariable("id") long id, @RequestBody Tafel newTafel) {
-        tafelService.updateTafel(id, newTafel);
-        return ResponseEntity.noContent().build();
-    }
-
-    @DeleteMapping(value = "/id")
-    public ResponseEntity<Object> deleteBooking(@PathVariable("id") long id) throws RecordNotFoundException {
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> removeTafel(@PathVariable("id") long id) {
         tafelService.removeTafel(id);
         return ResponseEntity.noContent().build();
     }
 
-
 }
+
+
+

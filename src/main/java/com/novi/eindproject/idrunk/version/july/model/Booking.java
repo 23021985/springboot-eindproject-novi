@@ -1,36 +1,71 @@
 package com.novi.eindproject.idrunk.version.july.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table
 public class Booking {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue
+    private Long id;
 
-    @Column
-    private String bookingName;
+//    private Long price;
 
-    @Column
-    private String bookingDate;
+//    private Long quantityTotal;
 
-    @Column
-    private String timeOfBooking;
+    private LocalDateTime date;
 
-    @Column
-    private boolean hasArrived;
+//    private float amount;
 
-    public Booking(int id, String bookingName, String bookingDate, String timeOfBooking, boolean hasArrived) {
+    @ManyToOne
+    private Tafel tafel;
+
+    @ManyToOne
+    private User user;
+
+    private String startTime;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
         this.id = id;
-        this.bookingName = bookingName;
-        this.bookingDate = bookingDate;
-        this.timeOfBooking = timeOfBooking;
-        this.hasArrived = hasArrived;
     }
 
-    public Booking() {
-
+    public User getUser() {
+        return user;
     }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+
+    public Tafel getTafel() {
+        return tafel;
+    }
+
+    public void setTafel(Tafel tafel) {
+        this.tafel = tafel;
+    }
+
 }
