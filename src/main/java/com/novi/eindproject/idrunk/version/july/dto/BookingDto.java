@@ -34,7 +34,7 @@ public class BookingDto {
         var dto = new BookingDto();
         dto.id = booking.getId();
         dto.tafel = TafelDto.fromTafel(booking.getTafel());
-//        dto.user = UserDto.fromUser(booking.getUser());
+        dto.user = UserDto.fromUser(booking.getUser());
         dto.startTime = booking.getStartTime();
         dto.date = booking.getDate();
         return dto;

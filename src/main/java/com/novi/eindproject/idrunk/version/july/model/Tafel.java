@@ -39,7 +39,7 @@ public class Tafel {
         this.tafelNr = tafelNr;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

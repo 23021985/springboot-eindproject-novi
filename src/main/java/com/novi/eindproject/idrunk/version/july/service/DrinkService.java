@@ -9,10 +9,17 @@ import java.util.List;
 public interface DrinkService {
 
     List<Drink> getDrinks();
+
     Drink getDrink(long id) throws RecordNotFoundException;
+
     Drink addDrink(Drink drink);
     void removeDrink(long id) throws RecordNotFoundException;
     void updateDrink(long id, Drink drink) throws RecordNotFoundException;
+
+
+    Drink deleteDrink(Long id);
+
+    Drink editDrink(Long id, Drink from);
 
 
 }

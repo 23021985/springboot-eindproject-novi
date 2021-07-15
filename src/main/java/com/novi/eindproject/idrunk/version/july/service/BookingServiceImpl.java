@@ -1,6 +1,8 @@
 package com.novi.eindproject.idrunk.version.july.service;
+import com.novi.eindproject.idrunk.version.july.exceptions.BadRequestException;
 import com.novi.eindproject.idrunk.version.july.exceptions.NotFoundException;
 import com.novi.eindproject.idrunk.version.july.model.Booking;
+import com.novi.eindproject.idrunk.version.july.model.BookingStatus;
 import com.novi.eindproject.idrunk.version.july.repository.BookingRepository;
 import com.novi.eindproject.idrunk.version.july.repository.TafelRepository;
 import com.novi.eindproject.idrunk.version.july.repository.UserRepository;
@@ -12,9 +14,9 @@ import java.util.List;
 @Service
 public class BookingServiceImpl implements BookingService {
 
-    private BookingRepository bookingRepository;
-    private TafelRepository tafelRepository;
-    private UserRepository userRepository;
+    private final BookingRepository bookingRepository;
+    private final TafelRepository tafelRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public BookingServiceImpl(BookingRepository bookingRepository, TafelRepository tafelRepository, UserRepository userRepository) {
@@ -57,8 +59,26 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Booking saveBooking(Booking booking, Long tafelId, String username) {
-        return bookingRepository.save(booking);
+        var optionalUser = userRepository.findById(username);
+        var optionalTafel = tafelRepository.findById(tafelId);
+
+        if (optionalUser.isPresent() && optionalTafel.isPresent()) {
+            var user = optionalUser.get();
+            var tafel = optionalTafel.get();
+
+            var overlappingStartBookings = bookingRepository.findBookingByDate(booking.getDate());
+            if (overlappingStartBookings.size() > 250) {
+                throw new BadRequestException();
+
+            }
+            booking.setUser(user);
+            booking.setTafel(tafel);
+            return bookingRepository.save(booking);
+        } else {
+            throw new NotFoundException();
+        }
     }
+
 
     @Override
     public List<Booking> getBookingsForTafel(Long tafelId) {
@@ -76,6 +96,18 @@ public class BookingServiceImpl implements BookingService {
             throw new NotFoundException();
         }
     }
+
+//    var booking = new Booking();
+//        booking.setId(id);
+////        booking.setUser(username);
+////        booking.setTafel(tafelId);
+////        booking.setPlannedStartTime(plannedStartTime);
+////        booking.setPlannedEndTime(plannedEndTime);
+//        booking.setStatus(BookingStatus.PLANNED);
+//
+//        return bookingRepository.save(booking);
+//    }
+
 }
 
 
