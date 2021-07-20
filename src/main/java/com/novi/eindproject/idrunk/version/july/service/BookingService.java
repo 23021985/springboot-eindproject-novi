@@ -1,28 +1,26 @@
 package com.novi.eindproject.idrunk.version.july.service;
-
 import com.novi.eindproject.idrunk.version.july.model.Booking;
-
-
+import com.novi.eindproject.idrunk.version.july.model.Tafel;
+import com.novi.eindproject.idrunk.version.july.model.User;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BookingService {
 
     List<Booking> getBookings();
-    Booking getBookings(long id);
-//    Booking addBooking(Booking booking);
-//    void removeBooking(long id);
-//    void updateBooking(long id);
 
-//    List<Booking> getBookingsForTafel(Long tafelId);
+    List<Booking> getBookingsForTafel(Tafel tafel);
 
     List<Booking> getBookingsOnDate(LocalDateTime date);
 
-    List<Booking> getBookingsByUsername(String username);
+    List<Booking> getBookingsByUser(User user);
 
-    Booking saveBooking(Booking booking, Long tafelId, String username);
+    void deleteBooking(Long id);
 
-    List<Booking> getBookingsForTafel(Long tafelId);
+    void updateBooking(Long id, Booking booking);
 
-    List<Booking> getBookingsForUser(String username);
+    void planBooking(String startTime, String endTime, Long tafelId, String username, LocalDateTime date);
+
+    Booking getById(Long id);
+
 }

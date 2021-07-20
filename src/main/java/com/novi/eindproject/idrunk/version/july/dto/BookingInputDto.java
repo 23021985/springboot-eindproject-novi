@@ -1,6 +1,6 @@
 package com.novi.eindproject.idrunk.version.july.dto;
-
 import com.novi.eindproject.idrunk.version.july.model.Booking;
+
 
 import java.time.LocalDateTime;
 
@@ -8,6 +8,8 @@ public class BookingInputDto {
     public Long tafelId;
 
     public String startTime;
+
+    public String endTime;
 
     public LocalDateTime date;
 
@@ -17,6 +19,8 @@ public class BookingInputDto {
         var booking = new Booking();
         booking.setStartTime(startTime);
         booking.setDate(date);
+        booking.setEndTime(endTime);
+
         return booking;
     }
 }

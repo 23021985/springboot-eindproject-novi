@@ -11,15 +11,13 @@ public class DrinkDto {
 
     private Long id;
 
-    public int count;
-
     public double price;
 
     public String name;
 
     public int amount;
 
-    private PlainOrderDto plainOrderDto;
+//    private PlainOrderDto plainOrderDto;
 
 
     public static DrinkDto fromDrink(Drink drink){
@@ -27,7 +25,6 @@ public class DrinkDto {
         drinkDto.setName(drink.getName());
         drinkDto.setId(drink.getId());
         drinkDto.setAmount(drink.getAmount());
-        drinkDto.setCount(drink.getCount());
 
         return drinkDto;
     }

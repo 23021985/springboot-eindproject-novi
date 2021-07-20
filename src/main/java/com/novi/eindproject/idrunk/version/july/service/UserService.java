@@ -1,9 +1,6 @@
 package com.novi.eindproject.idrunk.version.july.service;
-
-
 import com.novi.eindproject.idrunk.version.july.model.Authority;
 import com.novi.eindproject.idrunk.version.july.model.User;
-
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;

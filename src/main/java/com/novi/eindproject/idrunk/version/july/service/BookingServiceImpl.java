@@ -1,8 +1,9 @@
 package com.novi.eindproject.idrunk.version.july.service;
 import com.novi.eindproject.idrunk.version.july.exceptions.BadRequestException;
-import com.novi.eindproject.idrunk.version.july.exceptions.NotFoundException;
+import com.novi.eindproject.idrunk.version.july.exceptions.RecordNotFoundException;
 import com.novi.eindproject.idrunk.version.july.model.Booking;
-import com.novi.eindproject.idrunk.version.july.model.BookingStatus;
+import com.novi.eindproject.idrunk.version.july.model.Tafel;
+import com.novi.eindproject.idrunk.version.july.model.User;
 import com.novi.eindproject.idrunk.version.july.repository.BookingRepository;
 import com.novi.eindproject.idrunk.version.july.repository.TafelRepository;
 import com.novi.eindproject.idrunk.version.july.repository.UserRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -25,205 +27,105 @@ public class BookingServiceImpl implements BookingService {
         this.tafelRepository = tafelRepository;
     }
 
-
+    @Override
     public List<Booking> getBookings() {
         return bookingRepository.findAll();
     }
 
-    public Booking getBookings(long id) {
-        return bookingRepository.getById(id);
-    }
-
-    public Booking addBooking(Booking booking) {
-        return bookingRepository.save(booking);
-    }
-
-    public void removeBooking(long id) {
-        bookingRepository.deleteById(id);
-    }
-
-    public void updateBooking(long id) {
-
-    }
-
-
-    @Override
-    public List<Booking> getBookingsOnDate(LocalDateTime date) {
-        return bookingRepository.findBookingByDate(date);
-    }
-
-    @Override
-    public List<Booking> getBookingsByUsername(String username) {
-        return bookingRepository.findBookingByUser(username);
-    }
-
-    @Override
-    public Booking saveBooking(Booking booking, Long tafelId, String username) {
-        var optionalUser = userRepository.findById(username);
-        var optionalTafel = tafelRepository.findById(tafelId);
-
-        if (optionalUser.isPresent() && optionalTafel.isPresent()) {
-            var user = optionalUser.get();
-            var tafel = optionalTafel.get();
-
-            var overlappingStartBookings = bookingRepository.findBookingByDate(booking.getDate());
-            if (overlappingStartBookings.size() > 250) {
-                throw new BadRequestException();
-
-            }
-            //voor de drankjes var order = new Order();
-            //order.setDrink(drinks);
-            //order.setUser(user);
-
-
-            booking.setUser(user);
-            booking.setTafel(tafel);
-            return bookingRepository.save(booking);
-        } else {
-            throw new NotFoundException();
-        }
-    }
-
     @Override
     public List<Booking> getBookingsForTafel(Long tafelId) {
-        return null;
-    }
-
-    @Override
-    public List<Booking> getBookingsForUser(String username) {
-        var optionalUser = userRepository.findById(username);
-
-        if (optionalUser.isPresent()) {
-            var user = optionalUser.get();
-            return bookingRepository.findByUser(user);
+        var optionalTafel = tafelRepository.findById(tafelId);
+        if (optionalTafel.isPresent()) {
+            var tafel = optionalTafel.get();
+            return bookingRepository.findByTafel(tafelId);
         } else {
-            throw new NotFoundException();
+            throw new RecordNotFoundException("Er is helaas geen tafel gevonden..");
         }
     }
 
-//    var booking = new Booking();
-//        booking.setId(id);
-////        booking.setUser(username);
-////        booking.setTafel(tafelId);
-////        booking.setPlannedStartTime(plannedStartTime);
-////        booking.setPlannedEndTime(plannedEndTime);
-//        booking.setStatus(BookingStatus.PLANNED);
-//
-//        return bookingRepository.save(booking);
-//    }
+        @Override
+        public List<Booking> getBookingsOnDate (LocalDateTime date){
+            var optionalDate = bookingRepository.findById(date);
+            if (optionalDate.isPresent()) {
+                var date = optionalDate.get();
+                return bookingRepository.findByTafel(tafelId);
+            } else {
+                throw new RecordNotFoundException("Er is helaas geen tafel gevonden..");
+            }
+        }
 
-}
+            @Override
+            public List<Booking> getBookingsByUsername (String username){
+                var optionalUser = userRepository.findById(username);
+                if (optionalUser.isPresent()) {
+                    var user = optionalUser.get();
+                    return bookingRepository.findBookingByUsername(username);
+                } else {
+                    throw new RecordNotFoundException("Er zijn geen boekingen gevonden..");
+                }
+            }
 
+            @Override
+            public void deleteBooking (Long id){
+                bookingRepository.deleteById(id);
+            }
 
-//@Service
-//    public class BookingServiceImpl implements BookingService{
-//
-//    private BookingRepository bookingRepository;
-//    private TafelRepository tafelRepository;
-//    private UserRepository userRepository;
-//
-//   @Autowired
-//   public BookingServiceImpl(BookingRepository bookingRepository, TafelRepository tafelRepository, UserRepository userRepository){
-//       this.bookingRepository = bookingRepository;
-//       this.tafelRepository = tafelRepository;
-//       this.userRepository = userRepository;
-//   }
-//
-//    @Override
-//    public List<Booking> getBookingsBetweenDates(LocalDateTime start, LocalDateTime end) {
-//        return bookingRepository.findByPlannedStartTimeBetween(start, end);
-//    }
-//
-//    @Override
-//    public List<Booking> getBookingsForTafel(Long tafelId) {
-////        var optionalTafel = tafelRepository.findById(tafelId);
-////
-////        if (optionalTafel.isPresent()) {
-////            var tafel = optionalTafel.get();
-////            return bookingRepository.findByTafel(tafel);
-////        } else {
-////            throw new NotFoundException();
-////        }
-//        return null;
-//    }
-//
-//    @Override
-//    public List<Booking> getBookingsForUser(String username) {
-////        var optionalUser = UserRepository.findByUsername(username);
-//
-////        if (optionalUser.isPresent()) {
-////            var user = optionalUser.get();
-////            return bookingRepository.findByUser(user);
-////        } else {
-////            throw new NotFoundException();
-////        }
-//        return bookingRepository.findBookingByUsername(username);
-//    }
-//
-//    public Booking planBooking(Long id, String tafelId, String username, LocalDateTime plannedStartTime, LocalDateTime plannedEndTime) {
-////        var optionalUser = UserRepository.findByUsername(username);
-////        var optionalTafel = tafelRepository.findById(tafelId);
-////
-////        // If either the user or tafel does not exist, we throw an exception
-////        if (optionalUser.isEmpty() || optionalTafel.isEmpty()) {
-////            throw new NotFoundException();
-////        }
-////
-////        var user = optionalUser.get();
-////        var tafel = optionalTafel.get();
-//
-//        // Checks whether there is an overlap in the schedule, if there is an overlap it throws an exception
-////        validateBookingSlotIsFree(plannedStartTime, plannedEndTime, tafel);
-//
-//        // The booking details are valid, we create it and store it in the database
-//
-//        var booking = new Booking();
-//        booking.setId(id);
-////        booking.setUser(username);
-////        booking.setTafel(tafelId);
-//        booking.setPlannedStartTime(plannedStartTime);
-//        booking.setPlannedEndTime(plannedEndTime);
-//        booking.setStatus(BookingStatus.PLANNED);
-//
-//        return bookingRepository.save(booking);
-//    }
-//
-//    @Override
-//    public Booking completeBooking(Long bookingId, LocalDateTime actualStartTime, LocalDateTime actualEndTime) {
-//        return null;
-//    }
-//
-////    private void validateBookingSlotIsFree(LocalDateTime startTime, LocalDateTime endTime, Tafel tafel) {
-////        var overlappingStartBookings = bookingRepository.findByPlannedStartTimeBetweenAndTafel(startTime,
-////                endTime, tafel);
-////        var overlappingEndBookings = bookingRepository.findByPlannedEndTimeBetweenAndTafel(startTime,
-////                endTime, tafel);
-////        if (overlappingStartBookings.size() > 0 || overlappingEndBookings.size() > 0) {
-////            throw new BadRequestException();
-////        }
-////    }
-//
-////    @Override
-////    public Booking completeBooking(Long bookingId, LocalDateTime actualStartTime, LocalDateTime actualEndTime) {
-////        var optionalBooking = bookingRepository.findById(bookingId);
-////
-////        if (optionalBooking.isEmpty()) {
-////            throw new NotFoundException();
-////        }
-////        var booking = optionalBooking.get();
-//
-////        Calculate the booking charge
-////        var baseCharge = calculationService.calculateCharge(actualStartTime, actualEndTime);
-////        var discount = calculationService.calculateDiscount(baseCharge, booking.getDiscountCode());
-////        var charge = baseCharge - discount;
-//
-//        // Update and save the booking
-////        booking.setId(id);
-////        booking.setActualStartTime(actualStartTime);
-////        booking.setActualEndTime(actualEndTime);
-////        booking.setStatus(BookingStatus.INVOICED);
-////        booking.setCharge(charge);
-//
-////        return bookingRepository.save(booking);
-//    }
+            @Override
+            public void updateBooking (Long id, Booking booking){
+                Optional<Booking> optionalBooking = bookingRepository.findById(id);
+                if (optionalBooking.isPresent()) {
+                    bookingRepository.deleteById(id);
+                    bookingRepository.save(booking);
+                } else {
+                    throw new RecordNotFoundException("De boeking is helaas niet gevonden");
+                }
+            }
+
+            @Override
+            public void planBooking (String startTime, String endTime, Long tafelId, String username, LocalDateTime date)
+            {
+                var optionalTafel = tafelRepository.findById(tafelId);
+                var optionalUser = userRepository.findById(username);
+
+                if (optionalTafel.isEmpty() || optionalUser.isEmpty()) {
+                    throw new BadRequestException("Helaas, kapot");
+                }
+
+                var tafel = optionalTafel.get();
+                var user = optionalUser.get();
+
+                if (tafel != null) {
+                    validateBookingSlotIsFreeTafel(startTime, endTime, tafel);
+                }
+                var booking = new Booking();
+                booking.setTafel(tafel);
+                booking.setUser(user);
+                booking.setDate(date);
+                booking.setStartTime(startTime);
+                booking.setEndTime(endTime);
+
+                bookingRepository.save(booking);
+
+            }
+
+            private void validateBookingSlotIsFreeTafel (String bookingStartTime, String bookingEndTime, Tafel tafel){
+                var overlappingStartBooking = bookingRepository.findByBookingStartTimeBetweenAndTafel(bookingStartTime, bookingEndTime, tafel);
+                var overlappingEndBooking = bookingRepository.findByBookingEndTimeBetweenAndTafel(bookingStartTime, bookingEndTime, tafel);
+
+                if (overlappingStartBooking.size() > 0 || overlappingEndBooking.size() > 0) {
+                    throw new BadRequestException("Overlapping gevonden in de begin en eindtijd");
+                }
+            }
+
+            @Override
+            public Booking getById (Long id){
+                var optionalBooking = bookingRepository.findById(id);
+                if (optionalBooking.isPresent()) {
+                    return optionalBooking.get();
+                } else {
+                    throw new RecordNotFoundException("De boeking is helaas niet gevonden");
+                }
+            }
+        }
+
 

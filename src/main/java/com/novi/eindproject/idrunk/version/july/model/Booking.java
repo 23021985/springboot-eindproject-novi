@@ -10,13 +10,11 @@ public class Booking {
     @GeneratedValue
     private Long id;
 
-//    private Long price;
-
-//    private Long quantityTotal;
-
     private LocalDateTime date;
 
-//    private float amount;
+    private String startTime;
+
+    private String endTime;
 
     @ManyToOne
     private Tafel tafel;
@@ -24,7 +22,9 @@ public class Booking {
     @ManyToOne
     private User user;
 
-    private String startTime;
+    public User getUser() {
+        return user;
+    }
 
     public Long getId() {
         return id;
@@ -32,10 +32,6 @@ public class Booking {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     public void setUser(User user) {
@@ -66,4 +62,11 @@ public class Booking {
         this.tafel = tafel;
     }
 
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
 }

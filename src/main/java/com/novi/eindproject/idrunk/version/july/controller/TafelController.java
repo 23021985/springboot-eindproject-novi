@@ -17,26 +17,18 @@ public class TafelController {
         this.tafelService = tafelService;
     }
 
-
     @GetMapping("")
     public ResponseEntity<Object> getTafel() {return ResponseEntity.ok(tafelService.getTafel());}
 
-//    @PostMapping("")
-//    public ResponseEntity<Object> addBike(@RequestBody Bike bike) {
-//        bikeService.addBike(bike);
-//        return ResponseEntity.ok("added");
-//    }
-
     @PostMapping
     public TafelDto saveTafel(@RequestBody TafelInputDto dto) {
-        var tafel = tafelService.addTafel(dto.toTafel());
+        var tafel = tafelService.saveTafel(dto.toTafel());
         return TafelDto.fromTafel(tafel);
     }
 
-
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getTafels(@PathVariable("id") long id) {
-        Tafel tafel = (Tafel) tafelService.getTafels(id);
+    public ResponseEntity<Object> getTafel(@PathVariable("id") long id) {
+        Tafel tafel = (Tafel) tafelService.getTafel(id);
         return ResponseEntity.ok(tafel);
     }
 
@@ -45,7 +37,6 @@ public class TafelController {
         tafelService.removeTafel(id);
         return ResponseEntity.noContent().build();
     }
-
 }
 
 
