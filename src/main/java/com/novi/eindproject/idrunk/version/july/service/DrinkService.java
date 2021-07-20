@@ -3,6 +3,7 @@ package com.novi.eindproject.idrunk.version.july.service;
 
 import com.novi.eindproject.idrunk.version.july.exceptions.RecordNotFoundException;
 import com.novi.eindproject.idrunk.version.july.model.Drink;
+import com.novi.eindproject.idrunk.version.july.model.Order;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface DrinkService {
 
     Drink deleteDrink(Long id);
 
-    Drink editDrink(Long id, Drink from);
+//    Drink editDrink(Long id, Drink fromDrink);
 
 
 }

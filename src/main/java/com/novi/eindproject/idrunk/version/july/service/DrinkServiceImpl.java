@@ -1,16 +1,11 @@
 package com.novi.eindproject.idrunk.version.july.service;
-
-
-
 import com.novi.eindproject.idrunk.version.july.exceptions.RecordNotFoundException;
 import com.novi.eindproject.idrunk.version.july.model.Drink;
 import com.novi.eindproject.idrunk.version.july.repository.DrinkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
-
 
 @Service
 public class DrinkServiceImpl implements DrinkService{
@@ -40,16 +35,17 @@ public class DrinkServiceImpl implements DrinkService{
     public void updateDrink(long id, Drink drink) throws RecordNotFoundException {
     }
 
+    @Override
     public Drink deleteDrink(Long id){
         Drink drink = getDrink(id);
         drinkRepository.delete(drink);
         return drink;
     }
-
-    @Transactional
-    public Drink editDrink(Long id, Drink drink){
-        Drink drinkToEdit = getDrink(id);
-        drinkToEdit.setId(drink.getId);
-        return drinkToEdit;
-    }
+//
+//    @Transactional
+//    public Drink editDrink(Long id, Drink drink){
+//        Drink drinkToEdit = getDrink(id);
+//        drinkToEdit.setId(drink.getId);
+//        return drinkToEdit;
+//    }
 }

@@ -71,6 +71,11 @@ public class BookingServiceImpl implements BookingService {
                 throw new BadRequestException();
 
             }
+            //voor de drankjes var order = new Order();
+            //order.setDrink(drinks);
+            //order.setUser(user);
+
+
             booking.setUser(user);
             booking.setTafel(tafel);
             return bookingRepository.save(booking);
@@ -78,7 +83,6 @@ public class BookingServiceImpl implements BookingService {
             throw new NotFoundException();
         }
     }
-
 
     @Override
     public List<Booking> getBookingsForTafel(Long tafelId) {

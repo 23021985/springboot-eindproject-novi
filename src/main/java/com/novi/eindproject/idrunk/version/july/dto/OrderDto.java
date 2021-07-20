@@ -1,30 +1,31 @@
 package com.novi.eindproject.idrunk.version.july.dto;
-
-
-import com.novi.eindproject.idrunk.version.july.model.Drink;
 import com.novi.eindproject.idrunk.version.july.model.Order;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Data
 public class OrderDto {
-    private Long id;
-    public int count;
-    public double price;
-    public String name;
-    public int amount;
-    private List<DrinkDto> drinksDto = new ArrayList<>();
 
-    public static OrderDto from(Order order){
-        OrderDto orderDto = new OrderDto();
-        orderDto.setId(order.getId());
-        orderDto.setAmount(order.getAmount());
-        orderDto.setCount(order.getCount());
-        orderDto.setDrinksDto(order.getDrinks().stream().map(DrinkDto::from).collect(Collectors.toList()));
-        return orderDto;
+    Long id;
+
+    private String name;
+
+    DrinkDto drink;
+
+    UserDto user;
+
+    int amount;
+
+    double count;
+
+    public static OrderDto fromOrder(Order order) {
+        var dto = new OrderDto();
+        dto.id = order.getId();
+        dto.name = order.getName();
+        dto.drink = DrinkDto.fromDrink(order.getDrink());
+        dto.user = UserDto.fromUser(order.getUser());
+        dto.amount = order.getAmount();
+        dto.count = order.getCount();
+
+        return dto;
     }
-
 }

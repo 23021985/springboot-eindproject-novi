@@ -1,16 +1,19 @@
 package com.novi.eindproject.idrunk.version.july.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.novi.eindproject.idrunk.version.july.dto.DrinkDto;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
+@JsonSerialize
 @Data
 @Entity
 @Table
 public class Drink {
 
-    public long getId;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -24,18 +27,12 @@ public class Drink {
     @Column
     private int amount;
 
-    @Column
-    private int count;
+    @ManyToMany
+    Set<Order> OrderId;
 
-
-    @ManyToOne
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Order order;
     public long getId() {
         return id;
     }
-
 
     public void setId(long id) {
         this.id = id;
@@ -45,29 +42,25 @@ public class Drink {
         return name;
     }
 
-    public long getGetId() {
-        return getId;
-    }
+//    public long getGetId() {
+//        return getId;
+//    }
 
-    public void setGetId(long getId) {
-        this.getId = getId;
-    }
+//    public void setGetId(long getId) {
+//        this.getId = getId;
+//    }
 
     public void setPrice(double price) {
         this.price = price;
     }
 
-    public void setCount(int count) {
-        this.count = count;
-    }
+//    public void setCount(int count) {
+//        this.count = count;
+//    }
 
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
+//    public Order getOrder() {
+//        return order;
+//    }
 
     public void setName(String name) {
         this.name = name;
@@ -93,10 +86,24 @@ public class Drink {
         return 0;
     }
 
-    public static Drink from(DrinkDto drinkDto){
-        Drink drink = new Drink();
-        drink.setId(drinkDto.getId());
-        drink.setAmount(drinkDto.getAmount());
-        return drink;
+    public void addToOrder(Order order) {
     }
+
+    public void removeDrinkFromOrder(Order order) {
+    }
+
+    public Order getOrder() {
+        Order order = new Order();
+        return order;
+    }
+
+//    public static Drink from(DrinkDto drinkDto){
+//        Drink drink = new Drink();
+//        drink.setId(drinkDto.getId());
+//        drink.setAmount(drinkDto.getAmount());
+//        drink.setName(drinkDto.getName());
+////        drink.setCount(drinkDto.getCount());
+//        drink.setPrice(drinkDto.getPrice());
+//        return drink;
+//    }
 }

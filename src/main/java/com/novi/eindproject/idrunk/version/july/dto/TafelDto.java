@@ -9,15 +9,11 @@ public class TafelDto {
     public int maxGuest;
 
     public static TafelDto fromTafel(Tafel tafel) {
-        if (tafel == null) return null;
-
+//        if (tafel == null) return null;
         var dto = new TafelDto();
         dto.id = tafel.getId();
         dto.tafelNr = tafel.getTafelNr();
         dto.maxGuest = tafel.getMaxGuest();
         return dto;
     }
-
-
-
 }

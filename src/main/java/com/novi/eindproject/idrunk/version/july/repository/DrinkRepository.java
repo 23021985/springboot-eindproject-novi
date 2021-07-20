@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DrinkRepository extends JpaRepository<Drink, Long> {
 
-    Drink getById(long id);
+    Drink getById(Long id);
 
 }

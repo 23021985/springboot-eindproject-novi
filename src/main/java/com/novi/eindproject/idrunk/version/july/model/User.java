@@ -11,6 +11,9 @@ public class User {
 
     @Id
     @Column(nullable = false, unique = true)
+    private Long id;
+
+    @Column
     private String username;
 
     @OneToMany(mappedBy = "user")
@@ -27,6 +30,8 @@ public class User {
 
     @Column
     private Long age;
+
+
 
     public String getFirstName() {
         return firstName;

@@ -26,7 +26,6 @@ public class Booking {
 
     private String startTime;
 
-
     public Long getId() {
         return id;
     }
@@ -58,7 +57,6 @@ public class Booking {
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
-
 
     public Tafel getTafel() {
         return tafel;

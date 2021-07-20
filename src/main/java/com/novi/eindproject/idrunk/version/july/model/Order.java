@@ -1,12 +1,14 @@
 package com.novi.eindproject.idrunk.version.july.model;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.novi.eindproject.idrunk.version.july.dto.OrderDto;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -14,36 +16,84 @@ import java.util.List;
 public class Order {
 
     @Id
+    @JsonSerialize
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
 
-    @OneToMany(
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(name = "order_id")
-    private List<Drink> drinks = new ArrayList<>();
+    @ManyToOne
+    private User user;
 
+    @ManyToMany
+            @JoinTable(
+                    name = "drinks_ordered",
+                    joinColumns = @JoinColumn(name = "order_id"),
+                    inverseJoinColumns = @JoinColumn(name = "drink_id"))
+    Set<Drink> orderedDrinks;
 
-    public void addDrink(Drink drink){
-        drinks.add(drink);
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void removeDrink(Drink drink){
-        drinks.remove(drink);
+    public Set<Drink> getOrderedDrinks() {
+        return orderedDrinks;
+    }
+
+    public void setOrderedDrinks(Set<Drink> orderedDrinks) {
+        this.orderedDrinks = orderedDrinks;
+    }
+
+    private String name;
+
+    private int amount;
+
+    private int count;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getAmount() {
-        return 0;
+        return amount;
     }
 
     public int getCount() {
-        return 0;
+        return count;
     }
 
-    public static Order from(OrderDto orderDto){
-        Order order = new Order();
-        order.setName(orderDto.getName());
-        return order;
+    public void setCount(int count) {
+    }
+
+    public void setPrice(double price) {
+    }
+
+    public void setAmount(int amount) {
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+
+    public void setDrink(Drink drink) {
+    }
+
+    public void setUserByUsername(User username) {
+    }
+
+    public Drink getDrink() {
+        Drink drink = new Drink();
+        return drink;
     }
 }
