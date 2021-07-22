@@ -1,9 +1,9 @@
 package com.novi.eindproject.idrunk.version.july.model;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "booking")
 public class Booking {
 
     @Id
@@ -15,6 +15,7 @@ public class Booking {
     private String startTime;
 
     private String endTime;
+
 
     @ManyToOne
     private Tafel tafel;
@@ -69,4 +70,5 @@ public class Booking {
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
+
 }

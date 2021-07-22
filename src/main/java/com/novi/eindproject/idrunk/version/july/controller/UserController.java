@@ -15,7 +15,7 @@ import java.util.Map;
     @CrossOrigin
     @RequestMapping(value = "/users")
     public class UserController {
-        private final UserService userService;
+        private UserService userService;
 
     @Autowired
     public UserController(UserService userService) {

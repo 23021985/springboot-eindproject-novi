@@ -14,8 +14,8 @@ public class Tafel {
 
     private int maxGuest;
 
-//    @OneToMany(mappedBy = "tafel")
-//    List<Booking> bookings;
+    @OneToMany(mappedBy = "tafel")
+    List<Booking> bookings;
 
     public Long getTafelNr() {
         return tafelNr;

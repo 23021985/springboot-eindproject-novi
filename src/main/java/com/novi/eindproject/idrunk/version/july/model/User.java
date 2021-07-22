@@ -1,6 +1,7 @@
 package com.novi.eindproject.idrunk.version.july.model;
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,8 +28,11 @@ public class User {
     @Column(nullable = false)
     private boolean enabled = true;
 
-//    @OneToMany(mappedBy = "user")
-//    List<Booking> bookings;
+    @OneToMany(mappedBy = "user")
+    List<Booking> bookings;
+
+    @OneToMany(mappedBy = "order")
+    List<Order> orders;
 
     @OneToMany(
             targetEntity = Authority.class,
@@ -37,7 +41,6 @@ public class User {
             orphanRemoval = true,
             fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
-
 
     public String getFirstName() {
         return firstName;
@@ -111,8 +114,6 @@ public class User {
         this.enabled = enabled;
     }
 
-
-
     public void addAuthority(Authority authority) {
         this.authorities.add(authority);
     }
@@ -120,6 +121,5 @@ public class User {
     public void removeAuthority(Authority authority) {
         this.authorities.remove(authority);
     }
-
 
 }

@@ -5,7 +5,9 @@ import com.novi.eindproject.idrunk.version.july.model.Tafel;
 public class TafelDto {
 
     public Long id;
+
     public Long tafelNr;
+
     public int maxGuest;
 
     public static TafelDto fromTafel(Tafel tafel) {

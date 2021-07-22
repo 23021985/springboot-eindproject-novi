@@ -1,18 +1,22 @@
-//package com.novi.eindproject.idrunk.version.july.service;
-//import com.novi.eindproject.idrunk.version.july.model.Booking;
-//import com.novi.eindproject.idrunk.version.july.model.Drink;
-//import com.novi.eindproject.idrunk.version.july.model.Order;
-//import java.util.List;
-//
-//public interface OrderService {
-//
-//    List <Order> getOrders();
-//
-//    Order getOrder(long id);
-//
-//    Order deleteOrder(Long id);
-//
-//    Order getOrder(Long id);
-//
-//    Order saveOrder(Order order);
-//}
+package com.novi.eindproject.idrunk.version.july.service;
+import com.novi.eindproject.idrunk.version.july.model.Drink;
+import com.novi.eindproject.idrunk.version.july.model.Order;
+import com.novi.eindproject.idrunk.version.july.model.User;
+import java.util.List;
+
+public interface OrderService {
+
+    List <Order> getOrders();
+
+    List<Order> getOrdersByUser(String username);
+
+    List<Order> getOrdersByTafelId(Long tafelId);
+
+    void deleteOrder(Long id);
+
+    void planOrder(Long id, int count, User user, Drink drink);
+
+    void updateOrder(Long id, Order order);
+
+    Order getOrder(Long id);
+}

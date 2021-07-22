@@ -3,7 +3,6 @@ import com.novi.eindproject.idrunk.version.july.exceptions.BadRequestException;
 import com.novi.eindproject.idrunk.version.july.exceptions.RecordNotFoundException;
 import com.novi.eindproject.idrunk.version.july.model.Booking;
 import com.novi.eindproject.idrunk.version.july.model.Tafel;
-import com.novi.eindproject.idrunk.version.july.model.User;
 import com.novi.eindproject.idrunk.version.july.repository.BookingRepository;
 import com.novi.eindproject.idrunk.version.july.repository.TafelRepository;
 import com.novi.eindproject.idrunk.version.july.repository.UserRepository;
@@ -35,31 +34,30 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<Booking> getBookingsForTafel(Long tafelId) {
         var optionalTafel = tafelRepository.findById(tafelId);
+
         if (optionalTafel.isPresent()) {
             var tafel = optionalTafel.get();
-            return bookingRepository.findByTafel(tafelId);
+
+            return bookingRepository.findByTafel(tafel);
         } else {
             throw new RecordNotFoundException("Er is helaas geen tafel gevonden..");
         }
     }
 
         @Override
-        public List<Booking> getBookingsOnDate (LocalDateTime date){
-            var optionalDate = bookingRepository.findById(date);
-            if (optionalDate.isPresent()) {
-                var date = optionalDate.get();
-                return bookingRepository.findByTafel(tafelId);
-            } else {
-                throw new RecordNotFoundException("Er is helaas geen tafel gevonden..");
-            }
+        public List<Booking> getBookingsOnDate (LocalDateTime date) {
+            return bookingRepository.findBookingByDate(date);
         }
 
+
             @Override
-            public List<Booking> getBookingsByUsername (String username){
+            public List<Booking> getBookingsByUserName (String username){
                 var optionalUser = userRepository.findById(username);
+
                 if (optionalUser.isPresent()) {
                     var user = optionalUser.get();
-                    return bookingRepository.findBookingByUsername(username);
+
+                    return bookingRepository.findBookingByUser(user);
                 } else {
                     throw new RecordNotFoundException("Er zijn geen boekingen gevonden..");
                 }
@@ -108,9 +106,9 @@ public class BookingServiceImpl implements BookingService {
 
             }
 
-            private void validateBookingSlotIsFreeTafel (String bookingStartTime, String bookingEndTime, Tafel tafel){
-                var overlappingStartBooking = bookingRepository.findByBookingStartTimeBetweenAndTafel(bookingStartTime, bookingEndTime, tafel);
-                var overlappingEndBooking = bookingRepository.findByBookingEndTimeBetweenAndTafel(bookingStartTime, bookingEndTime, tafel);
+            private void validateBookingSlotIsFreeTafel (String startTime, String endTime, Tafel tafel){
+                var overlappingStartBooking = bookingRepository.findByStartTimeBetweenAndTafel(startTime, endTime, tafel);
+                var overlappingEndBooking = bookingRepository.findByEndTimeBetweenAndTafel(startTime, endTime, tafel);
 
                 if (overlappingStartBooking.size() > 0 || overlappingEndBooking.size() > 0) {
                     throw new BadRequestException("Overlapping gevonden in de begin en eindtijd");

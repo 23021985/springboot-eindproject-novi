@@ -15,8 +15,8 @@ public class Drink {
 
     private int amount;
 
-//    @ManyToMany(mappedBy = "orderedDrinks")
-//    Set<Order> OrderId;
+   @ManyToOne
+   Order order;
 
     public long getId() {
         return id;

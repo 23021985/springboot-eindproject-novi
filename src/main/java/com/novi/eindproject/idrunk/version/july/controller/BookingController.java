@@ -25,7 +25,7 @@ public class BookingController {
     @GetMapping
     public List<BookingDto> getBookings(@RequestParam(value = "username", required = false) String username,
                                         @RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
-                                        @RequestParam(value = "tafel", required = false) Long tafelId) {
+                                        @RequestParam(value = "tafelId", required = false) Long tafelId) {
 
         var dtos = new ArrayList<BookingDto>();
 
@@ -34,7 +34,7 @@ public class BookingController {
             bookings = bookingService.getBookings();
 
         } else if(username != null && date == null && tafelId == null) {
-            bookings = bookingService.getBookingsByUsername(username);
+            bookings = bookingService.getBookingsByUserName(username);
 
         } else if (date != null && username == null && tafelId == null) {
             bookings = bookingService.getBookingsOnDate(date);

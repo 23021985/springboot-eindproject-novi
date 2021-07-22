@@ -1,7 +1,6 @@
 package com.novi.eindproject.idrunk.version.july.dto;
 import com.novi.eindproject.idrunk.version.july.model.Booking;
 
-
 import java.time.LocalDateTime;
 
 public class BookingInputDto {
