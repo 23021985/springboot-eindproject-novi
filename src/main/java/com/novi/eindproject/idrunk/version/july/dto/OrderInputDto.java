@@ -5,9 +5,9 @@ import com.novi.eindproject.idrunk.version.july.model.User;
 
 public class OrderInputDto {
 
-    public Drink drink;
-
     public User user;
+
+    public Drink drinkList;
 
     public Long id;
 
@@ -17,8 +17,7 @@ public class OrderInputDto {
        var order = new Order();
        order.setId(id);
        order.setCount(count);
-       order.setDrink(drink);
-       order.setUser(user);
+//       order.setUser(user);
 
        return order;
     }

@@ -17,14 +17,12 @@ public class DrinkDto {
 
     public int amount;
 
-//    private PlainOrderDto plainOrderDto;
 
-
-    public static DrinkDto fromDrink(Drink drink){
+    public static DrinkDto fromDrink(Drink drinkList){
         DrinkDto drinkDto = new DrinkDto();
-        drinkDto.setName(drink.getName());
-        drinkDto.setId(drink.getId());
-        drinkDto.setAmount(drink.getAmount());
+        drinkDto.setName(drinkList.getName());
+        drinkDto.setId(drinkList.getId());
+        drinkDto.setAmount(drinkList.getAmount());
 
         return drinkDto;
     }

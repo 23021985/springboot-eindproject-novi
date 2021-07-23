@@ -1,4 +1,5 @@
 package com.novi.eindproject.idrunk.version.july.dto;
+
 import com.novi.eindproject.idrunk.version.july.model.User;
 
 public class UserInputDto {
@@ -14,5 +15,6 @@ public class UserInputDto {
         user.setUsername(userName);
         user.setMail(mail);
         return user;
+
     }
 }

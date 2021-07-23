@@ -1,5 +1,6 @@
 package com.novi.eindproject.idrunk.version.july.model;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Order {
@@ -14,17 +15,19 @@ public class Order {
 
     private String name;
 
-    @ManyToOne
-    private Order order;
+
+    @OneToMany(mappedBy = "order")
+    List<Drink> drinkList;
 
     @ManyToOne
-    private User user;
+    User user;
 
     @ManyToOne
-    private Drink drink;
+    Tafel tafel;
 
     @ManyToOne
-    private Tafel tafel;
+    OrderDrink orderDrink;
+
 
     public Long getId() {
         return id;
@@ -40,8 +43,7 @@ public class Order {
 
     public void setCount(int count) {
     }
-    public void setDrink(Drink drink) {
-    }
+
     public boolean isHasBeenServed() {
         return hasBeenServed;
     }
@@ -54,24 +56,28 @@ public class Order {
         return hasBeenServed;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Drink> getDrinkList() {
+        return drinkList;
+    }
+
+    public void setDrinkList(List<Drink> drinkList) {
+        this.drinkList = drinkList;
     }
 
     public User getUser() {
         return user;
     }
 
-    public Drink getDrink() {
-        return drink;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Tafel getTafel() {
@@ -80,9 +86,5 @@ public class Order {
 
     public void setTafel(Tafel tafel) {
         this.tafel = tafel;
-    }
-
-    public String getName() {
-        return name;
     }
 }

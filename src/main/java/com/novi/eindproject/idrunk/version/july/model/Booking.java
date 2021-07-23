@@ -16,16 +16,11 @@ public class Booking {
 
     private String endTime;
 
+    @ManyToOne
+    User user;
 
     @ManyToOne
-    private Tafel tafel;
-
-    @ManyToOne
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
+    Tafel tafel;
 
     public Long getId() {
         return id;
@@ -33,10 +28,6 @@ public class Booking {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getStartTime() {
@@ -55,14 +46,6 @@ public class Booking {
         this.date = date;
     }
 
-    public Tafel getTafel() {
-        return tafel;
-    }
-
-    public void setTafel(Tafel tafel) {
-        this.tafel = tafel;
-    }
-
     public String getEndTime() {
         return endTime;
     }
@@ -71,4 +54,19 @@ public class Booking {
         this.endTime = endTime;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Tafel getTafel() {
+        return tafel;
+    }
+
+    public void setTafel(Tafel tafel) {
+        this.tafel = tafel;
+    }
 }

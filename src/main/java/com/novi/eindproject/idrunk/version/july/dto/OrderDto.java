@@ -10,22 +10,20 @@ public class OrderDto {
     Long id;
 
     @JsonSerialize
-    DrinkDto drink;
+    UserDto user;
 
     @JsonSerialize
-    UserDto user;
+    DrinkDto drinkList;
 
     double count;
 
     public static OrderDto fromOrder(Order order) {
         var dto = new OrderDto();
         dto.id = order.getId();
-        dto.drink = DrinkDto.fromDrink((Drink) order.hasBeenServed());
+        dto.drinkList = DrinkDto.fromDrink((Drink) order.hasBeenServed());
         dto.user = UserDto.fromUser(order.getUser());
         dto.count = order.getCount();
 
         return dto;
     }
-
-
 }

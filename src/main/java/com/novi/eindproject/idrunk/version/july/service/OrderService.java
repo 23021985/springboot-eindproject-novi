@@ -14,7 +14,7 @@ public interface OrderService {
 
     void deleteOrder(Long id);
 
-    void planOrder(Long id, int count, User user, Drink drink);
+    void planOrder(Long id, int count, String username);
 
     void updateOrder(Long id, Order order);
 

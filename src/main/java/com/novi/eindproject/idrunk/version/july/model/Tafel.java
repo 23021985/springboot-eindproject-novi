@@ -2,7 +2,6 @@ package com.novi.eindproject.idrunk.version.july.model;
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity
 public class Tafel {
 
@@ -15,7 +14,10 @@ public class Tafel {
     private int maxGuest;
 
     @OneToMany(mappedBy = "tafel")
-    List<Booking> bookings;
+    List<Booking> bookingList;
+
+    @OneToMany(mappedBy = "tafel")
+    List<Order> orderList;
 
     public Long getTafelNr() {
         return tafelNr;

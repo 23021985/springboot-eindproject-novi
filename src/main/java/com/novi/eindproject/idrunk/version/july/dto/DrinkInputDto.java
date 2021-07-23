@@ -1,5 +1,4 @@
 package com.novi.eindproject.idrunk.version.july.dto;
-
 import com.novi.eindproject.idrunk.version.july.model.Drink;
 
 public class DrinkInputDto {

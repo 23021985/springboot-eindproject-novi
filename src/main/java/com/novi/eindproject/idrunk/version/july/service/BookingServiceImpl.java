@@ -111,7 +111,7 @@ public class BookingServiceImpl implements BookingService {
                 var overlappingEndBooking = bookingRepository.findByEndTimeBetweenAndTafel(startTime, endTime, tafel);
 
                 if (overlappingStartBooking.size() > 0 || overlappingEndBooking.size() > 0) {
-                    throw new BadRequestException("Overlapping gevonden in de begin en eindtijd");
+                    throw new BadRequestException("Overlapping gevonden in de begin en/of eindtijd");
                 }
             }
 

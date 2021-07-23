@@ -1,6 +1,5 @@
 package com.novi.eindproject.idrunk.version.july.model;
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 public class Drink {
@@ -15,8 +14,13 @@ public class Drink {
 
     private int amount;
 
-   @ManyToOne
-   Order order;
+
+    @ManyToOne
+    Order order;
+
+    @ManyToOne
+    OrderDrink orderDrink;
+
 
     public long getId() {
         return id;
@@ -48,6 +52,22 @@ public class Drink {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public OrderDrink getOrderDrink() {
+        return orderDrink;
+    }
+
+    public void setOrderDrink(OrderDrink orderDrink) {
+        this.orderDrink = orderDrink;
     }
 }
 

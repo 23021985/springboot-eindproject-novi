@@ -1,14 +1,10 @@
 package com.novi.eindproject.idrunk.version.july.service;
-
 import com.novi.eindproject.idrunk.version.july.exceptions.BadRequestException;
 import com.novi.eindproject.idrunk.version.july.exceptions.RecordNotFoundException;
 import com.novi.eindproject.idrunk.version.july.model.Drink;
 import com.novi.eindproject.idrunk.version.july.model.Order;
 import com.novi.eindproject.idrunk.version.july.model.User;
-import com.novi.eindproject.idrunk.version.july.repository.DrinkRepository;
-import com.novi.eindproject.idrunk.version.july.repository.OrderRepository;
-import com.novi.eindproject.idrunk.version.july.repository.TafelRepository;
-import com.novi.eindproject.idrunk.version.july.repository.UserRepository;
+import com.novi.eindproject.idrunk.version.july.repository.*;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,16 +16,16 @@ import java.util.Optional;
 class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
-    private final DrinkRepository drinkRepository;
     private final UserRepository userRepository;
     private final TafelRepository tafelRepository;
+    private final OrderDrinkRepository orderDrinkRepository;
 
     @Autowired
-    OrderServiceImpl(TafelRepository tafelRepository, OrderRepository orderRepository, DrinkRepository drinkRepository, UserRepository userRepository) {
+    OrderServiceImpl(OrderDrinkRepository orderDrinkRepository, OrderRepository orderRepository, UserRepository userRepository, TafelRepository tafelRepository) {
         this.orderRepository = orderRepository;
-        this.drinkRepository = drinkRepository;
         this.userRepository = userRepository;
         this.tafelRepository = tafelRepository;
+        this.orderDrinkRepository = orderDrinkRepository;
     }
 
     @Override
@@ -65,7 +61,6 @@ class OrderServiceImpl implements OrderService {
         }
     }
 
-
     @Override
     public void updateOrder(Long id, Order order) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
@@ -89,24 +84,26 @@ class OrderServiceImpl implements OrderService {
 
     @Override
     public void deleteOrder(Long id) {
-        orderRepository.deleteById(id);
+        orderDrinkRepository.deleteById(id);
     }
 
     @Override
-    public void planOrder(Long id, int count, User user, Drink drink) {
-        var optionalUser = userRepository.findByUser(user);
-        var optionalDrink = drinkRepository.findAll();
+    public void planOrder(Long id, int count, String username) {
+        var optionalUser = userRepository.findById(username);
+        var optionalOrderDrink = orderDrinkRepository.findById(id);
 
-        if (optionalUser.isEmpty() || optionalDrink.isEmpty()) {
+        if (optionalUser.isEmpty() ) {
             throw new BadRequestException("Er zijn geen resulataten om weer te geven");
         }
-
-        if (drink == null) {
+        if (optionalOrderDrink == null) {
             throw new RecordNotFoundException("Helaas er is geen drankje ingevuld");
         }
 
+        var user = optionalUser.get();
+        var orderDrink = optionalOrderDrink.get();
+
+
         var order = new Order();
-        order.setDrink(drink);
         order.setUser(user);
         order.setCount(count);
         order.setId(id);
