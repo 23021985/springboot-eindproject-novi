@@ -44,12 +44,6 @@ public class BookingServiceImpl implements BookingService {
         }
     }
 
-        @Override
-        public List<Booking> getBookingsOnDate (LocalDateTime date) {
-            return bookingRepository.findBookingByDate(date);
-        }
-
-
             @Override
             public List<Booking> getBookingsByUserName (String username){
                 var optionalUser = userRepository.findById(username);
@@ -80,7 +74,7 @@ public class BookingServiceImpl implements BookingService {
             }
 
             @Override
-            public void planBooking (String startTime, String endTime, Long tafelId, String username, LocalDateTime date)
+            public void planBooking (LocalDateTime startTime, LocalDateTime endTime, Long tafelId, String username)
             {
                 var optionalTafel = tafelRepository.findById(tafelId);
                 var optionalUser = userRepository.findById(username);
@@ -98,7 +92,6 @@ public class BookingServiceImpl implements BookingService {
                 var booking = new Booking();
                 booking.setTafel(tafel);
                 booking.setUser(user);
-                booking.setDate(date);
                 booking.setStartTime(startTime);
                 booking.setEndTime(endTime);
 
@@ -106,7 +99,7 @@ public class BookingServiceImpl implements BookingService {
 
             }
 
-            private void validateBookingSlotIsFreeTafel (String startTime, String endTime, Tafel tafel){
+            private void validateBookingSlotIsFreeTafel (LocalDateTime startTime, LocalDateTime endTime, Tafel tafel){
                 var overlappingStartBooking = bookingRepository.findByStartTimeBetweenAndTafel(startTime, endTime, tafel);
                 var overlappingEndBooking = bookingRepository.findByEndTimeBetweenAndTafel(startTime, endTime, tafel);
 
@@ -124,6 +117,11 @@ public class BookingServiceImpl implements BookingService {
                     throw new RecordNotFoundException("De boeking is helaas niet gevonden");
                 }
             }
-        }
+
+    @Override
+    public List<Booking> getBookingsBetweenDates(LocalDateTime startTime, LocalDateTime endTime) {
+        return bookingRepository.findByStartTimeBetween(startTime, endTime);
+    }
+}
 
 

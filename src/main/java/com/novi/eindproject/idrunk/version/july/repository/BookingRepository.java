@@ -8,14 +8,14 @@ import java.util.List;
 
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
-    List<Booking> findBookingByDate(LocalDateTime date);
-
     List<Booking> findBookingByUser(User user);
 
     List<Booking> findByTafel(Tafel tafel);
 
-    List <Booking> findByStartTimeBetweenAndTafel(String startTime, String endTime, Tafel tafel);
+    List <Booking> findByStartTimeBetweenAndTafel(LocalDateTime startTime, LocalDateTime endTime, Tafel tafel);
 
-    List <Booking>  findByEndTimeBetweenAndTafel(String startTime, String endTime, Tafel tafel);
+    List <Booking>  findByEndTimeBetweenAndTafel(LocalDateTime startTime, LocalDateTime endTime, Tafel tafel);
+
+    List<Booking> findByStartTimeBetween(LocalDateTime startTime, LocalDateTime endTime);
 }
 

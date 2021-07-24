@@ -24,22 +24,23 @@ public class BookingController {
 
     @GetMapping
     public List<BookingDto> getBookings(@RequestParam(value = "username", required = false) String username,
-                                        @RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
+                                        @RequestParam(value = "startTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
+                                        @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime,
                                         @RequestParam(value = "tafelId", required = false) Long tafelId) {
 
         var dtos = new ArrayList<BookingDto>();
 
         List<Booking> bookings;
-        if (username == null && date == null && tafelId == null) {
+        if (username == null && startTime == null && endTime == null && tafelId == null) {
             bookings = bookingService.getBookings();
 
-        } else if(username != null && date == null && tafelId == null) {
+        } else if(username != null && startTime == null && endTime == null && tafelId == null) {
             bookings = bookingService.getBookingsByUserName(username);
 
-        } else if (date != null && username == null && tafelId == null) {
-            bookings = bookingService.getBookingsOnDate(date);
+        } else if (startTime != null && endTime != null && username == null && tafelId == null) {
+            bookings = bookingService.getBookingsBetweenDates(startTime, endTime);
 
-        } else if (tafelId != null && date == null && username == null) {
+        } else if (tafelId != null && startTime == null && endTime == null && username == null) {
             bookings = bookingService.getBookingsForTafel(tafelId);
         } else {
             throw new BadRequestException();
@@ -60,7 +61,7 @@ public class BookingController {
 
     @PostMapping
     public void planBooking(@RequestBody BookingInputDto dto) {
-        bookingService.planBooking(dto.startTime, dto.endTime, dto.tafelId, dto.username, dto.date);
+        bookingService.planBooking(dto.startTime, dto.endTime, dto.tafelId, dto.username);
     }
 
     @DeleteMapping("/{id}")

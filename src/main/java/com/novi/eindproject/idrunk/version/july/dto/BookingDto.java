@@ -10,18 +10,18 @@ public class BookingDto {
 
     Long id;
 
-    String startTime;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    LocalDateTime startTime;
 
-    String endTime;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    LocalDateTime endTime;
+
 
     @JsonSerialize
     TafelDto tafel;
 
     @JsonSerialize
     UserDto user;
-
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    LocalDateTime date;
 
 
     public static BookingDto fromBooking(Booking booking) {
@@ -30,7 +30,6 @@ public class BookingDto {
         dto.tafel = TafelDto.fromTafel(booking.getTafel());
         dto.user = UserDto.fromUser(booking.getUser());
         dto.startTime = booking.getStartTime();
-        dto.date = booking.getDate();
         dto.endTime = booking.getEndTime();
 
         return dto;

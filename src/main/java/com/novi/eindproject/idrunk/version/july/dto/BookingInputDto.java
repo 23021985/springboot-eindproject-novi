@@ -6,18 +6,15 @@ import java.time.LocalDateTime;
 public class BookingInputDto {
     public Long tafelId;
 
-    public String startTime;
+    public LocalDateTime startTime;
 
-    public String endTime;
-
-    public LocalDateTime date;
+    public LocalDateTime endTime;
 
     public String username;
 
     public Booking toBooking() {
         var booking = new Booking();
         booking.setStartTime(startTime);
-        booking.setDate(date);
         booking.setEndTime(endTime);
 
         return booking;

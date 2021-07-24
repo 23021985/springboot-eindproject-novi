@@ -10,11 +10,11 @@ public class Booking {
     @GeneratedValue
     private Long id;
 
-    private LocalDateTime date;
+    @Column
+    private LocalDateTime startTime;
 
-    private String startTime;
-
-    private String endTime;
+    @Column
+    private LocalDateTime endTime;
 
     @ManyToOne
     User user;
@@ -30,27 +30,19 @@ public class Booking {
         this.id = id;
     }
 
-    public String getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public String getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
@@ -69,4 +61,5 @@ public class Booking {
     public void setTafel(Tafel tafel) {
         this.tafel = tafel;
     }
+
 }
