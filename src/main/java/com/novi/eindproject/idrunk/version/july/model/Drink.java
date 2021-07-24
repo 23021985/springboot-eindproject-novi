@@ -1,28 +1,30 @@
 package com.novi.eindproject.idrunk.version.july.model;
-
 import javax.persistence.*;
 
 @Entity
-@Table
 public class Drink {
 
-    public long getId;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long id;
 
-    @Column
     private String name;
 
-    @Column
     private double price;
 
-    @Column
     private int amount;
+
+
+    @ManyToOne
+    Order order;
+
+    @ManyToOne
+    OrderDrink orderDrink;
+
+
     public long getId() {
         return id;
     }
-
 
     public void setId(long id) {
         this.id = id;
@@ -40,7 +42,7 @@ public class Drink {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -52,4 +54,21 @@ public class Drink {
         this.amount = amount;
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public OrderDrink getOrderDrink() {
+        return orderDrink;
+    }
+
+    public void setOrderDrink(OrderDrink orderDrink) {
+        this.orderDrink = orderDrink;
+    }
 }
+
+

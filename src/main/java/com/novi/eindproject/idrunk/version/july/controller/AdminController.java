@@ -16,6 +16,5 @@ public class AdminController {
     public ResponseEntity<Object> getMessage() {
         return new ResponseEntity<>("SECURED REST endpoint: /admin", HttpStatus.OK);
     }
-
 }
 

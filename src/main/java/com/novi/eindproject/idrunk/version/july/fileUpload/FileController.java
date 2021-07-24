@@ -19,20 +19,23 @@ public class FileController {
     @Autowired
     FileService fileService;
 
+
     @GetMapping("/files")
     public ResponseEntity<Object> getFiles() {
         Iterable<FileModel> files = fileService.getFiles();
         return ResponseEntity.ok().body(files);
     }
 
+
     @GetMapping("/files/{id}")
-    public ResponseEntity<Object> getFileInfo(@PathVariable long id) {
+    public ResponseEntity<Object> getFileInfo(@PathVariable Long id) {
         FileResponseDto response = fileService.getFileById(id);
         return ResponseEntity.ok().body(response);
     }
 
+
     @GetMapping("/files/{id}/download")
-    public ResponseEntity downloadFile(@PathVariable long id) {
+    public ResponseEntity downloadFile(@PathVariable Long id) {
         Resource resource = fileService.downloadFile(id);
         String mediaType = "application/octet-stream";
         return ResponseEntity.ok()
@@ -41,8 +44,9 @@ public class FileController {
                 .body(resource);
     }
 
+
     @PostMapping(value = "/files",
-//            consumes = {MediaType.MULTIPART_FORM_DATA_VALUE},
+            consumes = {MediaType.MULTIPART_FORM_DATA_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE} )
     public ResponseEntity<Object> uploadFile(FileRequestDto FileDto) {
         long newId = fileService.uploadFile(FileDto);
@@ -53,10 +57,10 @@ public class FileController {
         return ResponseEntity.created(location).body(location);
     }
 
+
     @DeleteMapping("/files/{id}")
-    public ResponseEntity<Object> deleteFile(@PathVariable long id) {
+    public ResponseEntity<Object> deleteFile(@PathVariable Long id) {
         fileService.deleteFile(id);
         return ResponseEntity.noContent().build();
     }
-
 }

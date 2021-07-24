@@ -11,11 +11,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.Map;
 
-    @RestController
-    @CrossOrigin
-    @RequestMapping(value = "/users")
-    public class UserController {
-        private final UserService userService;
+@RestController
+@CrossOrigin
+@RequestMapping(value = "/users")
+public class UserController {
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {

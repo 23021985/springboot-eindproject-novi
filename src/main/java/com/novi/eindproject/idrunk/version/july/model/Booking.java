@@ -1,31 +1,26 @@
 package com.novi.eindproject.idrunk.version.july.model;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "booking")
 public class Booking {
 
     @Id
     @GeneratedValue
     private Long id;
 
-//    private Long price;
+    @Column
+    private LocalDateTime startTime;
 
-//    private Long quantityTotal;
-
-    private LocalDateTime date;
-
-//    private float amount;
+    @Column
+    private LocalDateTime endTime;
 
     @ManyToOne
-    private Tafel tafel;
+    User user;
 
     @ManyToOne
-    private User user;
-
-    private String startTime;
-
+    Tafel tafel;
 
     public Long getId() {
         return id;
@@ -35,6 +30,22 @@ public class Booking {
         this.id = id;
     }
 
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
     public User getUser() {
         return user;
     }
@@ -42,23 +53,6 @@ public class Booking {
     public void setUser(User user) {
         this.user = user;
     }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
 
     public Tafel getTafel() {
         return tafel;

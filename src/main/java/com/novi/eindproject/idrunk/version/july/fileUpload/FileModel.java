@@ -1,6 +1,5 @@
 package com.novi.eindproject.idrunk.version.july.fileUpload;
 
-
 import lombok.Data;
 
 import javax.persistence.*;

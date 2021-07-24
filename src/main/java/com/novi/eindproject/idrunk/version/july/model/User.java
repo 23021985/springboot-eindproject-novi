@@ -13,9 +13,6 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @OneToMany(mappedBy = "user")
-    List<Booking> bookings;
-
     @Column(nullable = false, length = 255)
     private String password;
 
@@ -28,34 +25,6 @@ public class User {
     @Column
     private Long age;
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Long getAge() {
-        return age;
-    }
-
-    public void setAge(Long age) {
-        this.age = age;
-    }
-
-    public void setAuthorities(Set<Authority> authorities) {
-        this.authorities = authorities;
-    }
-
     @Column(nullable = false)
     private boolean enabled = true;
 
@@ -64,6 +33,12 @@ public class User {
 
     @Column
     private String email;
+
+    @OneToMany
+    List<Order> orders;
+
+    @OneToMany(mappedBy = "user")
+    List<Booking> bookingList;
 
     @OneToMany(
             targetEntity = Authority.class,
@@ -100,4 +75,34 @@ public class User {
 
     public void setMail(String mail) {
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Long getAge() {
+        return age;
+    }
+
+    public void setAge(Long age) {
+        this.age = age;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+    }
+
+
 }

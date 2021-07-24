@@ -11,4 +11,5 @@ public interface FileService {
     long uploadFile(FileRequestDto fileDto);
     void deleteFile(long id);
     Resource downloadFile(long id);
+
 }
