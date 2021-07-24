@@ -5,7 +5,7 @@ import com.novi.eindproject.idrunk.version.july.model.User;
 
 public class OrderInputDto {
 
-    public User user;
+    public String username;
 
     public Drink drinkList;
 
@@ -17,7 +17,7 @@ public class OrderInputDto {
        var order = new Order();
        order.setId(id);
        order.setCount(count);
-//       order.setUser(user);
+
 
        return order;
     }

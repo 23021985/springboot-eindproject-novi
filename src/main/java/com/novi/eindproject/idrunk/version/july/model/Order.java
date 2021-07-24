@@ -76,7 +76,7 @@ public class Order {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(String username) {
         this.user = user;
     }
 

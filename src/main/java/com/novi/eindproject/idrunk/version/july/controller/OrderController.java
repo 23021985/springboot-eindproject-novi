@@ -48,10 +48,10 @@ public class OrderController {
         return OrderDto.fromOrder(order);
     }
 
-//    @PostMapping
-//    public void planOrder(@RequestBody OrderInputDto dto) {
-//        orderService.planOrder(dto.id, dto.count, dto.user);
-//    }
+    @PostMapping
+    public void planOrder(@RequestBody OrderInputDto dto) {
+        orderService.planOrder(dto.id, dto.count, (dto.username), dto.drinkList);
+    }
 
     @DeleteMapping("/{id}")
     public void deleteOrder(@PathVariable("id") Long id) {

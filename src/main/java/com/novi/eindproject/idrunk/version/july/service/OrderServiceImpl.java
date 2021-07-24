@@ -3,7 +3,6 @@ import com.novi.eindproject.idrunk.version.july.exceptions.BadRequestException;
 import com.novi.eindproject.idrunk.version.july.exceptions.RecordNotFoundException;
 import com.novi.eindproject.idrunk.version.july.model.Drink;
 import com.novi.eindproject.idrunk.version.july.model.Order;
-import com.novi.eindproject.idrunk.version.july.model.User;
 import com.novi.eindproject.idrunk.version.july.repository.*;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +87,7 @@ class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void planOrder(Long id, int count, String username) {
+    public void planOrder(Long id, int count, String username, Drink drinkList) {
         var optionalUser = userRepository.findById(username);
         var optionalOrderDrink = orderDrinkRepository.findById(id);
 
@@ -99,15 +98,13 @@ class OrderServiceImpl implements OrderService {
             throw new RecordNotFoundException("Helaas er is geen drankje ingevuld");
         }
 
-        var user = optionalUser.get();
+        var User = optionalUser.get();
         var orderDrink = optionalOrderDrink.get();
 
-
         var order = new Order();
-        order.setUser(user);
+        order.setUser(username);
         order.setCount(count);
         order.setId(id);
         orderRepository.save(order);
     }
-
 }
